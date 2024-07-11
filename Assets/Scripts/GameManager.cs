@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public static IEnumerable IngredientObjs => Singleton.ingredientObjs;
     public static IEnumerable RecipeObjs => Singleton.recipeObjs;
 
+    // Prefabs
+    [SerializeField] GameObject droppeableItemPrefab;
+    public static GameObject DroppeableItemPrefab => Singleton.droppeableItemPrefab;
+
 
     private void Awake()
     {

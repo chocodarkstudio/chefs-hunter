@@ -82,6 +82,13 @@
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Scripts\Items\DroppeableItem.cs" />
+    <Compile Include="Assets\Scripts\GlobalMouse.cs" />
+    <Compile Include="Assets\Scripts\Utilities\GUtils.cs" />
+    <Compile Include="Assets\Scripts\Utilities\FPSCount.cs" />
+    <Compile Include="Assets\Scripts\Utilities\SceneRef.cs" />
+    <Compile Include="Assets\Scripts\Utilities\EnviromentRestorer.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\Demigiant\DOTween\DOTween.XML" />
