@@ -57,45 +57,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIGridItems\UIGridItem.cs" />
-    <Compile Include="Assets\Scripts\Inventory\KitchenTableInventory.cs" />
-    <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryKitchenTable.cs" />
-    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Scripts\AlignToCam.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemRecipe.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemIngredient.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemIngredientObj.cs" />
-    <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryPlayer.cs" />
-    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
-    <Compile Include="Assets\Scripts\UI\UIAnim.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Items\DroppeableItem.cs" />
+    <Compile Include="Assets\Scripts\Inventory\KitchenTableInventory.cs" />
     <Compile Include="Assets\Scripts\UI\UIInventory\UIInventory.cs" />
+    <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryKitchenTable.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemStorage.cs" />
+    <Compile Include="Assets\Scripts\Utilities\FPSCount.cs" />
+    <Compile Include="Assets\Scripts\UI\UIFollowWorldTarget.cs" />
     <Compile Include="Assets\Scripts\Items\ItemObj.cs" />
+    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Scripts\Utilities\SceneRef.cs" />
+    <Compile Include="Assets\Scripts\Utilities\GUtils.cs" />
+    <Compile Include="Assets\Scripts\AlignToCam.cs" />
+    <Compile Include="Assets\Scripts\GlobalMouse.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemRecipe.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemWeapon.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Scripts\UI\UIItem.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemIngredient.cs" />
     <Compile Include="Assets\Scripts\UI\UIGridItems\UIGridHandler.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Utilities\EnviromentRestorer.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemIngredientObj.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UIRecipeItem.cs" />
     <Compile Include="Assets\Scripts\Items\ItemRecipeObj.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemWeaponObj.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
-    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
-    <Compile Include="Assets\Scripts\Items\DroppeableItem.cs" />
-    <Compile Include="Assets\Scripts\GlobalMouse.cs" />
-    <Compile Include="Assets\Scripts\Utilities\GUtils.cs" />
-    <Compile Include="Assets\Scripts\Utilities\FPSCount.cs" />
-    <Compile Include="Assets\Scripts\Utilities\SceneRef.cs" />
-    <Compile Include="Assets\Scripts\Utilities\EnviromentRestorer.cs" />
+    <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryPlayer.cs" />
+    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\UI\UIItem.cs" />
-    <Compile Include="Assets\Scripts\UI\UIRecipeItem.cs" />
-    <Compile Include="Assets\Scripts\UI\UIFollowWorldTarget.cs" />
-    <Compile Include="Assets\Scripts\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemWeapon.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemWeaponObj.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Scripts\UI\UIAnim.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\Demigiant\DOTween\DOTween.XML" />
@@ -349,11 +349,11 @@
     <Reference Include="DOTween">
       <HintPath>Assets\3rd Party\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
@@ -727,29 +727,14 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -763,11 +748,29 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
@@ -789,9 +792,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

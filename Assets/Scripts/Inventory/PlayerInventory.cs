@@ -16,4 +16,11 @@ public class PlayerInventory : MonoBehaviour
                 break;
         }
     }
+
+void Update(){
+if (Input.GetKeyDown(KeyCode.Q)){
+ItemIngredient item = ingredientsStorage.TakeSlot(0);
+DroppeableItem.CreateNew(item, transform.position+Vector3.forward*1);
+}
+}
 }
