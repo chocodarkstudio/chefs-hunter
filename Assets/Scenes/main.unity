@@ -1975,6 +1975,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ce28ea4bae3b44e8e667c318a3f146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1388377627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490795972098068260, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Tomato
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f12dcf6de5ad30438ba9279537a626b, type: 3}
 --- !u!1 &1434641237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,6 +2366,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2f3a84b62b2ca64bbf9390c1a6e8436, type: 2}
   recipeObjs:
   - {fileID: 11400000, guid: 5bc279f1a91f822438f487a2fb521be4, type: 2}
+  weaponObjs:
+  - {fileID: 11400000, guid: 617ba3dc4a7eadc46867cf2537e8b6a0, type: 2}
+  - {fileID: 11400000, guid: dcace85aca647a341bd239d9b3037429, type: 2}
+  - {fileID: 11400000, guid: cb644776df91ec94fb50c8d18b984ad6, type: 2}
   droppeableItemPrefab: {fileID: 3186042929568489969, guid: 77b5f55b12a73ff41a65202dda6effba,
     type: 3}
 --- !u!114 &1586113145

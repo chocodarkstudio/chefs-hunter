@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] ItemRecipeObj[] recipeObjs;
     public static IEnumerable RecipeObjs => Singleton.recipeObjs;
 
+    [SerializeField] ItemWeaponObj[] weaponObjs;
+    public static IEnumerable WeaponObjs => Singleton.weaponObjs;
+
 
     [Header("Prefabs")]
     [SerializeField] GameObject droppeableItemPrefab;
