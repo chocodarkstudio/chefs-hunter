@@ -1,6 +1,7 @@
 using Items;
 using System.Collections.Generic;
 using UIGridItems;
+using UIItem_NM;
 using UnityEngine;
 
 public class UIInventory<T> : MonoBehaviour
@@ -26,7 +27,7 @@ public class UIInventory<T> : MonoBehaviour
         if (itemStorage == null)
             return;
 
-        List<GridItem> items = new();
+        List<UIItemData> items = new();
         foreach (T item in itemStorage.Enumerable)
         {
             if (item == null)

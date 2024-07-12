@@ -1,139 +1,61 @@
+using UIItem_NM;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace UIGridItems
 {
-    public struct GridItem
-    {
-        /// <summary>
-        /// Use this id to identify items as a type or something </summary>
-        [field: SerializeField] public string ID { get; set; }
 
-        [field: SerializeField] public Sprite Icon { get; set; }
-        [field: SerializeField] public string TittleText { get; set; }
-        [field: SerializeField] public string BottomText { get; set; }
-    }
-
-    public class UIGridItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+    public class UIGridItem : UIItem
     {
         [field: SerializeField] public UIGridHandler ItemsHandler { get; private set; }
-        public GridItem Item { get; private set; }
-
-        [SerializeField] Image background;
-        [SerializeField] Image icon;
-
-        [SerializeField] Text tittleText;
-        [SerializeField] Text bottomText;
-
-        public bool ignoreEvents = false;
-        public bool draggable = true;
-
-
-        private void OnEnable()
-        {
-            UpdateData(Item);
-        }
-
-        public void ActiveBackground(bool active)
-        {
-            if (background == null)
-                return;
-            background.gameObject.SetActive(active);
-        }
-
-        public void SetTittleText(string text)
-        {
-            if (tittleText == null)
-                return;
-
-            tittleText.text = text;
-            tittleText.gameObject.SetActive(!string.IsNullOrEmpty(text));
-        }
-
-        public void SetBottomText(string text)
-        {
-            if (bottomText == null)
-                return;
-
-            bottomText.text = text;
-            bottomText.gameObject.SetActive(!string.IsNullOrEmpty(text));
-        }
-
-        public void SetIcon(Sprite iconSpr)
-        {
-            if (icon == null)
-                return;
-
-            icon.sprite = iconSpr;
-            icon.gameObject.SetActive(iconSpr != null);
-        }
-
-        public void UpdateData(GridItem item)
-        {
-            this.Item = item;
-
-            SetIcon(item.Icon);
-            SetTittleText(item.TittleText);
-            SetBottomText(item.BottomText);
-
-            // if ID is not defined, isnt draggable (null item)
-            draggable = !string.IsNullOrEmpty(item.ID);
-
-            gameObject.name = "GridItem " + item.ID;
-        }
-
 
         #region Pointer Events
-        public void OnPointerDown(PointerEventData eventData)
+        public override void OnPointerClick(PointerEventData eventData)
         {
-            if (ignoreEvents)
+            if (IgnoreEvents)
                 return;
 
-            //UIAnim.Scale(transform, Vector3.one * 0.9f);
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (ignoreEvents)
-                return;
+            base.OnPointerClick(eventData);
 
             ItemsHandler.OnItemClick(this);
-            //UIAnim.BtnClick(transform);
         }
 
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            if (ignoreEvents)
-                return;
-
-            //UIAnim.Scale(transform, Vector3.one);
-        }
 
 
         // drag
-        public void OnBeginDrag(PointerEventData eventData)
+        public override void OnBeginDrag(PointerEventData eventData)
         {
-            if (ignoreEvents || !draggable)
+            if (IgnoreEvents || !Draggable)
                 return;
+
+            base.OnBeginDrag(eventData);
+
             ItemsHandler.InitializePreviewItem(Item);
         }
-        public void OnDrag(PointerEventData eventData)
+        public override void OnDrag(PointerEventData eventData)
         {
-            if (ignoreEvents || !draggable)
+            if (IgnoreEvents || !Draggable)
                 return;
+
+            base.OnDrag(eventData);
+
             ItemsHandler.SetPreviewItemPosition(eventData.position);
         }
-        public void OnEndDrag(PointerEventData eventData)
+        public override void OnEndDrag(PointerEventData eventData)
         {
-            if (ignoreEvents || !draggable)
+            if (IgnoreEvents || !Draggable)
                 return;
+
+            base.OnEndDrag(eventData);
+
             ItemsHandler.DiscardPreviewItem();
         }
-        public void OnDrop(PointerEventData eventData)
+        public override void OnDrop(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null)
                 return;
+
+            base.OnDrop(eventData);
 
             if (!eventData.pointerDrag.TryGetComponent(out UIGridItem from))
                 return;
@@ -143,7 +65,7 @@ namespace UIGridItems
                 return;
 
             // from is not draggable
-            if (from.ignoreEvents || !from.draggable)
+            if (from.IgnoreEvents || !from.Draggable)
                 return;
 
             from.ItemsHandler.OnItemDropped(from, this);

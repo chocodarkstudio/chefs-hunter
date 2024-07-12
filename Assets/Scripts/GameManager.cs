@@ -6,13 +6,18 @@ public class GameManager : MonoBehaviour
 {
     static GameManager Singleton;
 
-    [SerializeField] ItemIngredientObj[] ingredientObjs;
-    [SerializeField] ItemRecipeObj[] recipeObjs;
+    [Header("References")]
+    [SerializeField] Transform uiTopLevel;
+    public static Transform UITopLevel => Singleton.uiTopLevel;
 
+    [SerializeField] ItemIngredientObj[] ingredientObjs;
     public static IEnumerable IngredientObjs => Singleton.ingredientObjs;
+
+    [SerializeField] ItemRecipeObj[] recipeObjs;
     public static IEnumerable RecipeObjs => Singleton.recipeObjs;
 
-    // Prefabs
+
+    [Header("Prefabs")]
     [SerializeField] GameObject droppeableItemPrefab;
     public static GameObject DroppeableItemPrefab => Singleton.droppeableItemPrefab;
 
