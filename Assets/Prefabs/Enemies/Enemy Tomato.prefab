@@ -24,6 +24,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
         type: 2}
+    - target: {fileID: 611192501184799858, guid: 294569d6a3d42b14da24767ef330daec,
+        type: 3}
+      propertyPath: <WeaknessesWeapons>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 611192501184799858, guid: 294569d6a3d42b14da24767ef330daec,
+        type: 3}
+      propertyPath: <WeaknessesWeapons>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 617ba3dc4a7eadc46867cf2537e8b6a0,
+        type: 2}
     - target: {fileID: 3524746620792795196, guid: 294569d6a3d42b14da24767ef330daec,
         type: 3}
       propertyPath: m_RootOrder
