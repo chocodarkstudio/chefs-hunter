@@ -444,24 +444,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &945615510 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3041341321386731847, guid: 4a331d7a905d6c5499a8dd005cce20f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1221003519}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &945615514
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945615510}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1110548921
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,16 +512,6 @@ PrefabInstance:
       propertyPath: previewItemContainer
       value: 
       objectReference: {fileID: 2098445840}
-    - target: {fileID: 2684734809488572864, guid: 4a331d7a905d6c5499a8dd005cce20f4,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3041341320080457955, guid: 4a331d7a905d6c5499a8dd005cce20f4,
-        type: 3}
-      propertyPath: m_ConstraintCount
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3041341320302371930, guid: 4a331d7a905d6c5499a8dd005cce20f4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -650,11 +622,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIGridPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 3347037439519838076, guid: 4a331d7a905d6c5499a8dd005cce20f4,
-        type: 3}
-      propertyPath: background
-      value: 
-      objectReference: {fileID: 2109769534}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a331d7a905d6c5499a8dd005cce20f4, type: 3}
 --- !u!224 &1221003520 stripped
@@ -900,6 +867,11 @@ PrefabInstance:
       propertyPath: previewItemContainer
       value: 
       objectReference: {fileID: 2098445840}
+    - target: {fileID: 3041341320080457955, guid: 4a331d7a905d6c5499a8dd005cce20f4,
+        type: 3}
+      propertyPath: m_ConstraintCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3041341320302371930, guid: 4a331d7a905d6c5499a8dd005cce20f4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1263,6 +1235,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1d504b602cb4cb43999140474fd137f, type: 2}
   recipeObjs:
   - {fileID: 11400000, guid: 5bc279f1a91f822438f487a2fb521be4, type: 2}
+  uiTopLevel: {fileID: 2098445840}
   droppeableItemPrefab: {fileID: 3186042929568489969, guid: 77b5f55b12a73ff41a65202dda6effba,
     type: 3}
 --- !u!114 &1586113144
@@ -1492,15 +1465,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2109769534 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2684734809488572864, guid: 4a331d7a905d6c5499a8dd005cce20f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1221003519}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

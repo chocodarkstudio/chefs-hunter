@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UIItem_NM;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,7 +29,7 @@ namespace UIGridItems
             return gm.GetComponent<UIGridItem>();
         }
 
-        public void UpdateItems(List<GridItem> items)
+        public void UpdateItems(List<UIItemData> items)
         {
 
             // start in 1 index to skip itemBase
@@ -51,7 +52,7 @@ namespace UIGridItems
                 }
 
                 // update item data
-                newItem.UpdateData(item);
+                newItem.UpdateItem(item);
                 i++;
             }
 
@@ -76,7 +77,7 @@ namespace UIGridItems
             Debug.Log(targetSlot, targetSlot);
         }
 
-        public UIGridItem InitializePreviewItem(GridItem item)
+        public UIGridItem InitializePreviewItem(UIItemData item)
         {
             // create new if dosnt exists
             if (previewItem == null)
@@ -84,16 +85,13 @@ namespace UIGridItems
                 previewItem = CreateNewItem(previewItemContainer);
 
                 // disable raycast
-                if (previewItem.TryGetComponent(out CanvasGroup canvasGroup))
-                {
-                    canvasGroup.blocksRaycasts = false;
-                }
+                previewItem.CanvasGroup.blocksRaycasts = false;
+                previewItem.IgnoreEvents = true;
 
-                previewItem.ignoreEvents = true;
                 previewItem.ActiveBackground(false);
             }
 
-            previewItem.UpdateData(item);
+            previewItem.UpdateItem(item);
             previewItem.name = "Drag " + previewItem.name;
             previewItem.gameObject.SetActive(true);
             return previewItem;
