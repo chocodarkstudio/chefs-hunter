@@ -3,8 +3,20 @@ using UnityEngine;
 
 public class DroppeableItem : MonoBehaviour
 {
+    [SerializeField] ItemObj<ItemIngredient> itemObj;
+
     [field: SerializeField] public virtual Item Item { get; protected set; }
     [field: SerializeField] public virtual SpriteRenderer SpriteRenderer { get; protected set; }
+
+    private void Awake()
+    {
+        if (itemObj != null)
+        {
+            Item = itemObj.Item.Copy();
+            UpdateItemData();
+        }
+
+    }
 
     public static DroppeableItem CreateNew(Item item, Vector3 position)
     {
