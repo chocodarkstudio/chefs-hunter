@@ -96,6 +96,10 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\UI\UIAnim.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatManager.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatSequence.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatTurn.cs" />
+    <Compile Include="Assets\Scripts\Combat\PlayerCombat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\Demigiant\DOTween\DOTween.XML" />

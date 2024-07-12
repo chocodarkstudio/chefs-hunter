@@ -1,3 +1,4 @@
+using Combat_NM;
 using Items;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
     static GameManager Singleton;
 
     [Header("References")]
+    [SerializeField] CombatManager combatManager;
+    public static CombatManager CombatManager => Singleton.combatManager;
+
     [SerializeField] Transform uiTopLevel;
     public static Transform UITopLevel => Singleton.uiTopLevel;
 
