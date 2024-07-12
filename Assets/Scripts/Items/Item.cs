@@ -14,6 +14,14 @@ namespace Items
         [field: SerializeField] public virtual bool Droppeable { get; set; }
 
         public virtual object Clone() => MemberwiseClone();
+    }
 
+    public static class ItemExtension
+    {
+        public static T Copy<T>(this T item)
+            where T : Item
+        {
+            return (T)item.Clone();
+        }
     }
 }

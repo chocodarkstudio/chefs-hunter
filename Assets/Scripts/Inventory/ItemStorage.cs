@@ -31,6 +31,19 @@ public class ItemStorage<T>
 
     /// <summary>
     /// Finds an item by ID </summary>
+    public T GetSlot(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= items.Length)
+            return default;
+
+        if (IsEmpty())
+            return default;
+
+        return items[slotIndex];
+    }
+
+    /// <summary>
+    /// Finds an item by ID </summary>
     public T Get(int itemID)
     {
         if (IsEmpty())
@@ -89,10 +102,10 @@ public class ItemStorage<T>
 
     /// <summary>
     /// Adds an item reference to the storage </summary>
-    public void AddRef(T item)
+    public bool AddRef(T item)
     {
         if (item == null || IsFull())
-            return;
+            return false;
 
         for (int i = 0; i < items.Length; i++)
         {
@@ -102,24 +115,26 @@ public class ItemStorage<T>
                 items[i] = item;
                 Count++;
                 OnChange();
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     /// <summary>
     /// Adds a copy of the item to the storage </summary>
-    public void AddCopy(T item)
+    public bool AddCopy(T item)
     {
         if (item == null)
-            return;
+            return false;
 
-        AddRef((T)item.Clone());
+        return AddRef((T)item.Clone());
     }
 
     /// <summary>
     /// Removes an item by ID from the storage </summary>
-    public T Remove(int itemID)
+    public bool Remove(int itemID)
     {
         for (int i = 0; i < items.Length; i++)
         {
@@ -132,20 +147,20 @@ public class ItemStorage<T>
                 items[i] = null;
                 Count--;
                 OnChange();
-                return slot;
+                return true;
             }
         }
 
-        return default;
+        return false;
     }
 
     /// <summary>
     /// Removes an item by ID from the storage </summary>
-    public T Remove(T item) => Remove(item.ID);
+    public bool Remove(T item) => Remove(item.ID);
 
     /// <summary>
     /// Removes an item by reference from the storage </summary>
-    public T RemoveRef(T item)
+    public bool RemoveRef(T item)
     {
         for (int i = 0; i < items.Length; i++)
         {
@@ -155,11 +170,11 @@ public class ItemStorage<T>
                 items[i] = null;
                 Count--;
                 OnChange();
-                return item;
+                return true;
             }
         }
 
-        return default;
+        return false;
     }
 
     /// <summary>
@@ -176,6 +191,16 @@ public class ItemStorage<T>
 
         items[slotIndex] = item;
         OnChange();
+    }
+
+    public T TakeSlot(int slotIndex)
+    {
+        T item = GetSlot(slotIndex);
+        if (item == null)
+            return default;
+
+        Set(slotIndex, null);
+        return item;
     }
 
     /// <summary>

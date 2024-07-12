@@ -71,14 +71,16 @@ public class UIInventory<T> : MonoBehaviour
 
     protected virtual void OnItemDropped(UIGridItem fromSlot, UIGridItem targetSlot)
     {
-        // same ItemsHandler, same inventory
+        // Same ItemsHandlers, same inventory
         if (fromSlot.ItemsHandler == targetSlot.ItemsHandler)
         {
             SwapInternalSlots(fromSlot, targetSlot);
-            return;
         }
-
-        SwapInventoriesSlots(fromSlot, targetSlot);
+        // Different ItemsHandlers, two inventories
+        else
+        {
+            SwapInventoriesSlots(fromSlot, targetSlot);
+        }
     }
 
 

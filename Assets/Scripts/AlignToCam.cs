@@ -7,7 +7,8 @@ public class AlignToCam : MonoBehaviour
 
     private void Update()
     {
-        Camera camera = Camera.main;
-        transform.LookAt(camera.transform.position);
+        Vector3 newRotation = transform.eulerAngles;
+        newRotation.x = CameraController.MainCamera.transform.eulerAngles.x; // Align y-axis rotation
+        transform.eulerAngles = newRotation;
     }
 }
