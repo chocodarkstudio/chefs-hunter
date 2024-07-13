@@ -65,12 +65,13 @@ namespace Combat_NM
 
         public void EndCombat()
         {
+            Sequence.EndTurn();
+            onCombatEnded.Invoke();
+
             // reset properties
             Sequence = null;
             PlayerCombat = null;
             EnemyCombat = null;
-
-            onCombatEnded.Invoke();
         }
 
 
@@ -132,7 +133,7 @@ namespace Combat_NM
                 }
 
                 // Checks if the player weapon is the same as the enemy weapon.
-                bool sameWeapon = PlayerCombat.SelectedWeapon == EnemyCombat.SelectWeapon;
+                bool sameWeapon = PlayerCombat.SelectedWeapon.ID == EnemyCombat.SelectWeapon.ID;
                 SetTurnWin(sameWeapon);
             }
         }

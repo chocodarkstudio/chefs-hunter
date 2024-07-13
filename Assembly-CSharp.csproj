@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Combat\CombatTurn.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\Combat\EnemyCombat.cs" />
+    <Compile Include="Assets\Scripts\UI\UIWeaponSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\Demigiant\DOTween\DOTween.XML" />

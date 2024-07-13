@@ -37,6 +37,18 @@ public class EnemyCombat : MonoBehaviour
         if (GameManager.CombatManager.EnemyCombat != this)
             return;
 
+        bool playerLoseAttack = GameManager.CombatManager.Sequence.PlayedTurns.Exists((combatTurn) =>
+            combatTurn.type == CombatTurnTypes.Attack && !combatTurn.playerWin
+        );
+        if (playerLoseAttack)
+            return;
+
+        foreach (var ingredientDrop in Enemy.Drops)
+        {
+            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position + Vector3.forward * 2f);
+        }
+
+        Enemy.DestroyEnemy();
     }
 
     void OnTurnStep(CombatTurn combatTurn)
@@ -63,5 +75,7 @@ public class EnemyCombat : MonoBehaviour
     {
         int randomIndex = Random.Range(0, GameManager.WeaponObjs.Length);
         SelectWeapon = GameManager.WeaponObjs[randomIndex].Item.Copy();
+
+        Debug.Log($"Enemy SelectedWeapon: {SelectWeapon.Name}");
     }
 }

@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7cf56177434c742aac80ad6da991f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <UIInventoryPlayer>k__BackingField: {fileID: 0}
   <Inventory>k__BackingField: {fileID: 7792593166361810518}
 --- !u!114 &7792593166361810518
 MonoBehaviour:
@@ -223,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 7725721210269819972}
   playerMovement: {fileID: 1507487637}
+  uiWeaponSelector: {fileID: 0}
 --- !u!54 &-1530082990240265759
 Rigidbody:
   m_ObjectHideFlags: 0

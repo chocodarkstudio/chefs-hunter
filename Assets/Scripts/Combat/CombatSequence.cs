@@ -20,6 +20,11 @@ namespace Combat_NM
             PlayedTurns.Count >= Turns.Count * (Repeat + 1);
         public bool IsStarted => PlayedTurns.Count > 0;
 
+        public void EndTurn()
+        {
+            PlayedTurns.Add(CurrentTurn);
+        }
+
         public void NextTurn()
         {
             if (IsOver)
@@ -28,7 +33,7 @@ namespace Combat_NM
                 return;
             }
 
-            PlayedTurns.Add(CurrentTurn);
+            EndTurn();
 
             // reset if has repeat
             if (IsLastTurnIndex)

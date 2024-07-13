@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [field: SerializeField] public Player Player { get; protected set; }
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] UIWeaponSelector uiWeaponSelector;
 
     public ItemWeapon SelectedWeapon { get; protected set; }
 
@@ -14,6 +15,8 @@ public class PlayerCombat : MonoBehaviour
         CombatManager.onCombatInitialized.AddListener(OnCombatInitialized);
         CombatManager.onCombatEnded.AddListener(OnCombatEnded);
         CombatManager.onTurnStep.AddListener(OnTurnStep);
+
+        uiWeaponSelector.onWeaponSelected.AddListener(OnWeaponSelected);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,25 +32,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
             GameManager.CombatManager.NextStep();
-
-        if (GameManager.CombatManager.InCombat
-            && GameManager.CombatManager.Sequence.CurrentTurn.step == CombatTurnSteps.SelectWeapon)
-        {
-            ItemWeapon weapon = null;
-            if (Input.GetKeyDown(KeyCode.J))
-                weapon = GameManager.WeaponObjs[0].Item.Copy();
-            else if (Input.GetKeyDown(KeyCode.K))
-                weapon = GameManager.WeaponObjs[1].Item.Copy();
-            else if (Input.GetKeyDown(KeyCode.L))
-                weapon = GameManager.WeaponObjs[2].Item.Copy();
-
-            if (weapon != null)
-            {
-                SelectedWeapon = weapon;
-                GameManager.CombatManager.NextStep();
-            }
-        }
-
     }
 
 
@@ -55,12 +39,14 @@ public class PlayerCombat : MonoBehaviour
     {
         Debug.Log("OnCombatInitialized");
         playerMovement.LockInput();
+        Player.UIInventoryPlayer.Show(false);
     }
 
     void OnCombatEnded()
     {
         Debug.Log("OnCombatEnded");
         playerMovement.UnlockInput();
+        Player.UIInventoryPlayer.Show(true);
     }
 
     void OnTurnStep(CombatTurn combatTurn)
@@ -69,7 +55,8 @@ public class PlayerCombat : MonoBehaviour
         if (combatTurn.step == CombatTurnSteps.SelectWeapon)
         {
             SelectedWeapon = null;
-            Debug.Log("Select a weapon! J: Fork, K: Knife, L: Spoon");
+            uiWeaponSelector.Show(true);
+            Debug.Log("Select a weapon!");
         }
 
         // The player loses
@@ -101,5 +88,19 @@ public class PlayerCombat : MonoBehaviour
     }
 
 
+    void OnWeaponSelected(ItemWeapon weapon)
+    {
+        uiWeaponSelector.Show(false);
+        if (!GameManager.CombatManager.InCombat)
+            return;
 
+        Debug.Log($"Player SelectedWeapon: {weapon.Name}");
+
+        SelectedWeapon = weapon;
+
+        if (GameManager.CombatManager.Sequence.CurrentTurn.step == CombatTurnSteps.SelectWeapon)
+        {
+            GameManager.CombatManager.NextStep();
+        }
+    }
 }

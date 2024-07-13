@@ -2,25 +2,38 @@ using DG.Tweening;
 using Items;
 using ScreenTransition;
 using UIAnimShortcuts;
+using UIGridItems;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class UIInventoryPlayer : UIInventory<ItemIngredient>
+public class UIWeaponSelector : UIInventory<ItemWeapon>
 {
     [SerializeField] GameObject mainPanel;
-    [SerializeField] PlayerInventory playerInventory;
 
     public bool ShowState { get; private set; }
     Tween panelScaleTween;
 
+    // events
+    public readonly UnityEvent<ItemWeapon> onWeaponSelected = new();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        SetShow(false);
+    }
 
     protected override void Start()
     {
-        itemStorage = playerInventory.ingredientsStorage;
+        itemStorage = new(GameManager.WeaponObjs.Length);
+        foreach (var weaponObj in GameManager.WeaponObjs)
+        {
+            itemStorage.AddCopy(weaponObj.Item);
+        }
+
         base.Start();
 
-        Show(true);
+        gridHandler.onItemClick.AddListener(OnItemClick);
     }
-
 
 
     /// <summary>
@@ -69,4 +82,10 @@ public class UIInventoryPlayer : UIInventory<ItemIngredient>
         SetShow(false);
     }
 
+
+    void OnItemClick(UIGridItem slot)
+    {
+        ItemWeapon weapon = GetSlotItem(slot);
+        onWeaponSelected.Invoke(weapon.Copy());
+    }
 }

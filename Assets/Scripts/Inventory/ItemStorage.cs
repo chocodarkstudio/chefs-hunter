@@ -1,4 +1,5 @@
 using Items;
+using System;
 using System.Collections;
 using UnityEngine.Events;
 
@@ -9,19 +10,28 @@ public class ItemStorage<T>
     protected readonly T[] items;
     public int Count { get; private set; } = 0;
 
-    public virtual int MaxSlots { get; private set; }
-
     public IEnumerable Enumerable => items;
 
     // Events
     public readonly UnityEvent onChange = new();
 
 
-    public ItemStorage(int maxSlots = 0)
+    public ItemStorage(int slotsCount)
     {
-        MaxSlots = maxSlots;
-        items = new T[MaxSlots];
+        if (slotsCount <= 0)
+            throw new ArgumentException("slotsCount cannot be less than 1", nameof(slotsCount));
+
+        items = new T[slotsCount];
     }
+
+    public ItemStorage(T[] values)
+    {
+        if (values.Length <= 0)
+            throw new ArgumentException("values.Length cannot be less than 1", nameof(values));
+
+        items = values;
+    }
+
 
     public void OnChange()
     {
@@ -94,7 +104,7 @@ public class ItemStorage<T>
 
     /// <summary>
     /// Check if the storage is full </summary>
-    public bool IsFull() => MaxSlots > 0 && Count >= MaxSlots;
+    public bool IsFull() => items.Length > 0 && Count >= items.Length;
 
     /// <summary>
     /// Check if the storage is empty </summary>
