@@ -47,7 +47,12 @@ public class DroppeableItem : MonoBehaviour
             spawnTween.Kill();
 
         Visuals.position = animPos;
-        spawnTween = Visuals.DOLocalMove(Vector3.zero, 0.2f);
+        spawnTween = Visuals.DOLocalJump(
+            endValue: Vector3.zero,
+            jumpPower: 0.5f,
+            numJumps: 2,
+            duration: 0.4f
+        );
         return this;
     }
     public DroppeableItem SpawnAnim() => SpawnAnim(Visuals.position + Vector3.up * 0.5f);

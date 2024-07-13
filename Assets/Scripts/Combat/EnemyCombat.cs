@@ -1,4 +1,5 @@
 using Combat_NM;
+using GameUtils;
 using Items;
 using System.Linq;
 using UnityEngine;
@@ -45,8 +46,11 @@ public class EnemyCombat : MonoBehaviour
 
         foreach (var ingredientDrop in Enemy.Drops)
         {
-            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position)
-                .SpawnAnim();
+            Vector3 offset = GUtils.GetRandomPosition(-2, 2);
+            offset.y = 0;
+
+            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position + offset)
+                .SpawnAnim(transform.position);
         }
 
         Enemy.DestroyEnemy();

@@ -2067,6 +2067,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 661551438423173670, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: <Drops>k__BackingField.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 661551438423173670, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: <Drops>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
+        type: 2}
+    - target: {fileID: 661551438423173670, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: <Drops>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
+        type: 2}
+    - target: {fileID: 661551438423173670, guid: 3f12dcf6de5ad30438ba9279537a626b,
+        type: 3}
+      propertyPath: <Drops>k__BackingField.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
+        type: 2}
     - target: {fileID: 3584658252320800360, guid: 3f12dcf6de5ad30438ba9279537a626b,
         type: 3}
       propertyPath: m_RootOrder
