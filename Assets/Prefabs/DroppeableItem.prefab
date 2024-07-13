@@ -144,12 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cc95e52eefc9945a17377fb21168c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Visuals>k__BackingField: {fileID: 5779063192656196554}
+  <SpriteRenderer>k__BackingField: {fileID: 122033195866736837}
   <Item>k__BackingField:
     <ID>k__BackingField: -1
     <Name>k__BackingField: 
     <Icon>k__BackingField: {fileID: 0}
     <Droppeable>k__BackingField: 0
-  <SpriteRenderer>k__BackingField: {fileID: 122033195866736837}
+  itemObj: {fileID: 0}
 --- !u!135 &1851836635
 SphereCollider:
   m_ObjectHideFlags: 0

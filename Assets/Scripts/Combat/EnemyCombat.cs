@@ -45,7 +45,8 @@ public class EnemyCombat : MonoBehaviour
 
         foreach (var ingredientDrop in Enemy.Drops)
         {
-            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position + Vector3.forward * 2f);
+            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position)
+                .SpawnAnim();
         }
 
         Enemy.DestroyEnemy();

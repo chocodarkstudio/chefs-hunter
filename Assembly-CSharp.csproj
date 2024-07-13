@@ -56,14 +56,17 @@
     <Analyzer Include="D:\Programas\Visual Studio Community 2022\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Combat\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\UI\UIGridItems\UIGridItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\UI\UIWeaponSelector.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Items\DroppeableItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\KitchenTableInventory.cs" />
     <Compile Include="Assets\Scripts\UI\UIInventory\UIInventory.cs" />
     <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryKitchenTable.cs" />
+    <Compile Include="Assets\Scripts\Combat\EnemyCombat.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemStorage.cs" />
     <Compile Include="Assets\Scripts\Utilities\FPSCount.cs" />
     <Compile Include="Assets\Scripts\UI\UIFollowWorldTarget.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Assets\Scripts\Utilities\SceneRef.cs" />
     <Compile Include="Assets\Scripts\Utilities\GUtils.cs" />
     <Compile Include="Assets\Scripts\AlignToCam.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatTurn.cs" />
     <Compile Include="Assets\Scripts\GlobalMouse.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
@@ -87,21 +91,17 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIRecipeItem.cs" />
     <Compile Include="Assets\Scripts\Items\ItemRecipeObj.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatSequence.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Scripts\Items\ItemWeaponObj.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
+    <Compile Include="Assets\Scripts\Combat\CombatManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIInventory\UIInventoryPlayer.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\3rd Party\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\UI\UIAnim.cs" />
-    <Compile Include="Assets\Scripts\Combat\CombatManager.cs" />
-    <Compile Include="Assets\Scripts\Combat\CombatSequence.cs" />
-    <Compile Include="Assets\Scripts\Combat\CombatTurn.cs" />
-    <Compile Include="Assets\Scripts\Combat\PlayerCombat.cs" />
-    <Compile Include="Assets\Scripts\Combat\EnemyCombat.cs" />
-    <Compile Include="Assets\Scripts\UI\UIWeaponSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\Demigiant\DOTween\DOTween.XML" />

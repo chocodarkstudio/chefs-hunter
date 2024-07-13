@@ -23,7 +23,8 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             ItemIngredient item = ingredientsStorage.TakeSlot(0);
-            DroppeableItem.CreateNew(item, transform.position + Vector3.forward * 1);
+            DroppeableItem.CreateNew(item, transform.position + Vector3.forward * 1)
+                .SpawnAnim(transform.position);
         }
 
     }

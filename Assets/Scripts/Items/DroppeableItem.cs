@@ -1,12 +1,16 @@
+using DG.Tweening;
 using Items;
 using UnityEngine;
 
 public class DroppeableItem : MonoBehaviour
 {
-    [SerializeField] ItemObj<ItemIngredient> itemObj;
+    [field: SerializeField] public virtual Transform Visuals { get; protected set; }
+    [field: SerializeField] public virtual SpriteRenderer SpriteRenderer { get; protected set; }
 
     [field: SerializeField] public virtual Item Item { get; protected set; }
-    [field: SerializeField] public virtual SpriteRenderer SpriteRenderer { get; protected set; }
+    [SerializeField] ItemObj<ItemIngredient> itemObj;
+
+    Tween spawnTween;
 
     private void Awake()
     {
@@ -33,6 +37,21 @@ public class DroppeableItem : MonoBehaviour
         droppeable.UpdateItemData();
         return droppeable;
     }
+
+    /// <summary>
+    ///  </summary>
+    /// <param name="animPos">WorldSpace from where to start moving </param>
+    public DroppeableItem SpawnAnim(Vector3 animPos)
+    {
+        if (!spawnTween.IsActive())
+            spawnTween.Kill();
+
+        Visuals.position = animPos;
+        spawnTween = Visuals.DOLocalMove(Vector3.zero, 0.2f);
+        return this;
+    }
+    public DroppeableItem SpawnAnim() => SpawnAnim(Visuals.position + Vector3.up * 0.5f);
+
 
     public void UpdateItemData()
     {
