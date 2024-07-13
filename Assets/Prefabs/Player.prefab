@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae369656ec242e44831fd61bf11a7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
+  moveSpeed: 1
   smoothness: 0.8
 --- !u!114 &7136323066507485001
 MonoBehaviour:
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9c10647d83adf4abb1ca3e7e86b092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7725721210269819972}
+  <Player>k__BackingField: {fileID: 7725721210269819972}
   playerMovement: {fileID: 1507487637}
 --- !u!54 &-1530082990240265759
 Rigidbody:

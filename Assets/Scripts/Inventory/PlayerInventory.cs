@@ -1,4 +1,5 @@
 using Items;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -17,10 +18,42 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-void Update(){
-if (Input.GetKeyDown(KeyCode.Q)){
-ItemIngredient item = ingredientsStorage.TakeSlot(0);
-DroppeableItem.CreateNew(item, transform.position+Vector3.forward*1);
-}
-}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ItemIngredient item = ingredientsStorage.TakeSlot(0);
+            DroppeableItem.CreateNew(item, transform.position + Vector3.forward * 1);
+        }
+
+    }
+
+    public void DiscardPlayerFirstItems(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        List<ItemIngredient> discardedItems = new();
+
+        foreach (ItemIngredient ingredient in ingredientsStorage.Enumerable)
+        {
+            if (ingredient == null)
+                continue;
+
+            discardedItems.Add(ingredient);
+            if (discardedItems.Count >= amount)
+                break;
+        }
+
+        foreach (ItemIngredient ingredient in discardedItems)
+        {
+            ingredientsStorage.RemoveRef(ingredient);
+        }
+    }
+
+    public void DiscardPlayerRandomItems(int amount)
+    {
+        if (amount <= 0)
+            return;
+    }
 }

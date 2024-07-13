@@ -1,6 +1,5 @@
 using Combat_NM;
 using Items;
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,13 +14,13 @@ public class GameManager : MonoBehaviour
     public static Transform UITopLevel => Singleton.uiTopLevel;
 
     [SerializeField] ItemIngredientObj[] ingredientObjs;
-    public static IEnumerable IngredientObjs => Singleton.ingredientObjs;
+    public static ItemIngredientObj[] IngredientObjs => Singleton.ingredientObjs;
 
     [SerializeField] ItemRecipeObj[] recipeObjs;
-    public static IEnumerable RecipeObjs => Singleton.recipeObjs;
+    public static ItemRecipeObj[] RecipeObjs => Singleton.recipeObjs;
 
     [SerializeField] ItemWeaponObj[] weaponObjs;
-    public static IEnumerable WeaponObjs => Singleton.weaponObjs;
+    public static ItemWeaponObj[] WeaponObjs => Singleton.weaponObjs;
 
 
     [Header("Prefabs")]

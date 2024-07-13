@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: StandardSequence
   m_EditorClassIdentifier: 
   <Turns>k__BackingField:
-  - turnType: 0
+  - type: 0
+    step: 0
     playerWin: 0
-  - turnType: 1
+  - type: 1
+    step: 0
     playerWin: 0
-  - turnType: 0
+  - type: 0
+    step: 0
     playerWin: 0
   <Repeat>k__BackingField: 0

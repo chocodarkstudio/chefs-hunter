@@ -12,7 +12,7 @@ namespace Combat_NM
 
 
         public readonly List<CombatTurn> PlayedTurns = new();
-        public int CurrentTurnIndex { get; protected set; } = -1;
+        public int CurrentTurnIndex { get; protected set; }
         public CombatTurn CurrentTurn => Turns[CurrentTurnIndex];
         public bool IsLastTurnIndex => CurrentTurnIndex >= Turns.Count - 1;
 
@@ -20,23 +20,32 @@ namespace Combat_NM
             PlayedTurns.Count >= Turns.Count * (Repeat + 1);
         public bool IsStarted => PlayedTurns.Count > 0;
 
-        public CombatTurn NextTurn()
+        public void NextTurn()
         {
             if (IsOver)
             {
                 Debug.LogWarning("Cant do next turn, sequence is over!");
-                return CurrentTurn;
+                return;
             }
 
             PlayedTurns.Add(CurrentTurn);
 
             // reset if has repeat
             if (IsLastTurnIndex)
-                CurrentTurnIndex = -1;
-
-            CurrentTurnIndex++;
-            return CurrentTurn;
+                CurrentTurnIndex = 0;
+            else
+                CurrentTurnIndex++;
         }
 
+        public void NextTurnStep()
+        {
+            if (CurrentTurn.step == CombatTurnSteps.End)
+                return;
+
+            CombatTurn turn = CurrentTurn;
+            turn.step++;
+
+            Turns[CurrentTurnIndex] = turn;
+        }
     }
 }

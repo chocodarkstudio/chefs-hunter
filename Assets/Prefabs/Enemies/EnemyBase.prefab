@@ -95,6 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3524746620792795196}
   - component: {fileID: 611192501184799858}
+  - component: {fileID: 7928971446630691538}
   - component: {fileID: 56623231229277694}
   - component: {fileID: 7641807194957719666}
   m_Layer: 0
@@ -134,6 +135,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: {fileID: 0}
   <Drops>k__BackingField: []
+--- !u!114 &7928971446630691538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395349224235794800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f5617de83a6ac43924d63cee2ee68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Enemy>k__BackingField: {fileID: 611192501184799858}
+  <WeaknessesWeapons>k__BackingField: []
 --- !u!54 &56623231229277694
 Rigidbody:
   m_ObjectHideFlags: 0

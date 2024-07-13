@@ -7,8 +7,8 @@ namespace Combat_NM
     {
         [SerializeField] protected CombatSequence StandardSequence;
 
-        public Player Player { get; protected set; }
-        public Enemy Enemy { get; protected set; }
+        public PlayerCombat PlayerCombat { get; protected set; }
+        public EnemyCombat EnemyCombat { get; protected set; }
         public CombatSequence Sequence { get; protected set; }
 
         public bool InCombat => Sequence != null && !Sequence.IsOver;
@@ -16,26 +16,26 @@ namespace Combat_NM
         // events
         public static readonly UnityEvent onCombatInitialized = new();
         public static readonly UnityEvent onCombatEnded = new();
+        public static readonly UnityEvent<CombatTurn> onTurnStep = new();
 
-        public void InitializeCombat(CombatSequence sequence, Player player, Enemy enemy)
+        public void InitializeCombat(CombatSequence sequence, PlayerCombat playerCombat, EnemyCombat enemyCombat)
         {
             // already in combat
             if (InCombat)
                 return;
 
             // invalid participants
-            if (player == null || enemy == null)
+            if (playerCombat == null || enemyCombat == null)
                 return;
 
             Sequence = Instantiate(sequence);
-            Player = player;
-            Enemy = enemy;
+            PlayerCombat = playerCombat;
+            EnemyCombat = enemyCombat;
 
             onCombatInitialized.Invoke();
-            Debug.Log("InitializeCombat");
         }
-        public void InitializeCombat(Player player, Enemy enemy)
-            => InitializeCombat(StandardSequence, player, enemy);
+        public void InitializeCombat(PlayerCombat playerCombat, EnemyCombat enemyCombat)
+            => InitializeCombat(StandardSequence, playerCombat, enemyCombat);
 
 
         public void StartCombat()
@@ -44,22 +44,112 @@ namespace Combat_NM
             if (!InCombat || Sequence.IsStarted)
                 return;
 
-            NextTurn();
+            onTurnStep.Invoke(Sequence.CurrentTurn);
         }
 
         public void NextTurn()
         {
+            // not in combat or not started
+            if (!InCombat)
+                return;
+
             Sequence.NextTurn();
+
+            if (Sequence.IsOver)
+            {
+                EndCombat();
+                return;
+            }
+            onTurnStep.Invoke(Sequence.CurrentTurn);
         }
 
         public void EndCombat()
         {
             // reset properties
             Sequence = null;
-            Player = null;
-            Enemy = null;
+            PlayerCombat = null;
+            EnemyCombat = null;
 
             onCombatEnded.Invoke();
         }
+
+
+        public void NextStep()
+        {
+            // not in combat or not started
+            if (!InCombat)
+                return;
+
+            if (Sequence.CurrentTurn.step == CombatTurnSteps.End)
+            {
+                NextTurn();
+                return;
+            }
+
+
+            Sequence.NextTurnStep();
+
+            if (Sequence.CurrentTurn.step == CombatTurnSteps.CheckWin)
+                OnCheckWinStep();
+
+            onTurnStep.Invoke(Sequence.CurrentTurn);
+        }
+
+
+        void OnCheckWinStep()
+        {
+            // not in combat or already started
+            if (!InCombat)
+                return;
+
+            if (Sequence.CurrentTurn.type == CombatTurnTypes.Attack)
+            {
+                // player has no weapon selected,  dont give player the win
+                if (PlayerCombat.SelectedWeapon == null)
+                {
+                    SetTurnWin(false);
+                    return;
+                }
+
+                // check if the player weapon is an enemy weakness
+                bool isWeaponWeakness = EnemyCombat.IsWeaponWeakness(PlayerCombat.SelectedWeapon);
+                SetTurnWin(isWeaponWeakness);
+            }
+            else if (Sequence.CurrentTurn.type == CombatTurnTypes.Defense)
+            {
+                // player has no weapon selected, dont give player the win
+                if (PlayerCombat.SelectedWeapon == null)
+                {
+                    SetTurnWin(false);
+                    return;
+                }
+
+                // enemy dosnt have selected weapon, give player the win
+                if (EnemyCombat.SelectWeapon == null)
+                {
+                    SetTurnWin(true);
+                    return;
+                }
+
+                // Checks if the player weapon is the same as the enemy weapon.
+                bool sameWeapon = PlayerCombat.SelectedWeapon == EnemyCombat.SelectWeapon;
+                SetTurnWin(sameWeapon);
+            }
+        }
+
+
+        void SetTurnWin(bool playerWin)
+        {
+            Debug.Log($"PlayerWin: {playerWin}");
+
+            // already in that state
+            if (Sequence.CurrentTurn.playerWin == playerWin)
+                return;
+
+            CombatTurn turn = Sequence.CurrentTurn;
+            turn.playerWin = playerWin;
+            Sequence.Turns[Sequence.CurrentTurnIndex] = turn;
+        }
     }
+
 }

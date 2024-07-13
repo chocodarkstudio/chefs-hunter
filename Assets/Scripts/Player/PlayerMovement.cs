@@ -28,25 +28,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovementUpdate()
     {
-        Vector3 movement = Vector3.zero;
-        if (!IsLocked)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.z = Input.GetAxisRaw("Vertical");
+
         }
 
-        speed += movement;
+        if (!IsLocked)
+        {
+            Vector3 movement = Vector3.zero;
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.z = Input.GetAxisRaw("Vertical");
+
+            // Normalize diagonal movement
+            if (movement.magnitude > 1)
+                movement.Normalize();
+
+            speed += movement;
+        }
 
         // no speed
         if (speed.magnitude == 0)
             return;
-
-        // clamp
-        speed = new Vector3(Mathf.Clamp(speed.x, -1, 1), 0, Mathf.Clamp(speed.z, -1, 1));
-
-        // Normalize diagonal movement
-        if (speed.magnitude > 1f)
-            speed.Normalize();
 
         rb.MovePosition(rb.position + Time.deltaTime * moveSpeed * speed);
     }
@@ -64,5 +66,10 @@ public class PlayerMovement : MonoBehaviour
     public void UnlockInput()
     {
         IsLocked = false;
+    }
+
+    public void PushAway(Vector3 direction, float forceMultiplier = 1f)
+    {
+        speed = direction.normalized * forceMultiplier;
     }
 }
