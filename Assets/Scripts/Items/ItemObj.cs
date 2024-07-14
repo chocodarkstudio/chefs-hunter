@@ -10,7 +10,9 @@ namespace Items
         where T : Item
     {
         [field: SerializeField] public T Item { get; protected set; }
-
+        /// <summary>
+        /// Get a copy of the item </summary>
+        public T Get => Item.Copy();
 
         private void OnValidate()
         {
@@ -25,7 +27,8 @@ namespace Items
             }
         }
 
-        void AutoAssignIDs()
+        [ContextMenu(nameof(AutoAssignIDs))]
+        public virtual void AutoAssignIDs()
         {
             List<ItemObj<T>> itemsObjs = GetLocalFolderItemObjs();
             if (itemsObjs == null)

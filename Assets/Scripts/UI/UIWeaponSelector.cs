@@ -1,8 +1,10 @@
 using DG.Tweening;
 using Items;
 using ScreenTransition;
+using System.Collections.Generic;
 using UIAnimShortcuts;
 using UIGridItems;
+using UIItem_NM;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -87,5 +89,29 @@ public class UIWeaponSelector : UIInventory<ItemWeapon>
     {
         ItemWeapon weapon = GetSlotItem(slot);
         onWeaponSelected.Invoke(weapon.Copy());
+    }
+
+    public override void UpdateInventoryItems()
+    {
+        if (itemStorage == null)
+            return;
+
+        List<UIItemData> items = new();
+        foreach (ItemWeapon item in itemStorage.All)
+        {
+            if (item == null)
+            {
+                // put empty slot
+                items.Add(new());
+                continue;
+            }
+
+            items.Add(new()
+            {
+                ID = item.ID.ToString(),
+                Icon = item.weaponSelectorIcon
+            });
+        }
+        gridHandler.UpdateItems(items);
     }
 }

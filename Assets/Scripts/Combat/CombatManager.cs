@@ -45,6 +45,9 @@ namespace Combat_NM
                 return;
 
             onTurnStep.Invoke(Sequence.CurrentTurn);
+
+            // auto next step
+            Invoke(nameof(NextStep), 0.2f);
         }
 
         public void NextTurn()
@@ -61,6 +64,9 @@ namespace Combat_NM
                 return;
             }
             onTurnStep.Invoke(Sequence.CurrentTurn);
+
+            // auto next step
+            Invoke(nameof(NextStep), 0.2f);
         }
 
         public void EndCombat()
@@ -81,14 +87,17 @@ namespace Combat_NM
             if (!InCombat)
                 return;
 
+
             if (Sequence.CurrentTurn.step == CombatTurnSteps.End)
             {
                 NextTurn();
                 return;
             }
 
-
             Sequence.NextTurnStep();
+            // auto next step, (not when SelectWeapon)
+            if (Sequence.CurrentTurn.step != CombatTurnSteps.SelectWeapon)
+                Invoke(nameof(NextStep), 0.2f);
 
             if (Sequence.CurrentTurn.step == CombatTurnSteps.CheckWin)
                 OnCheckWinStep();
@@ -126,14 +135,14 @@ namespace Combat_NM
                 }
 
                 // enemy dosnt have selected weapon, give player the win
-                if (EnemyCombat.SelectWeapon == null)
+                if (EnemyCombat.SelectedWeapon == null)
                 {
                     SetTurnWin(true);
                     return;
                 }
 
                 // Checks if the player weapon is the same as the enemy weapon.
-                bool sameWeapon = PlayerCombat.SelectedWeapon.ID == EnemyCombat.SelectWeapon.ID;
+                bool sameWeapon = PlayerCombat.SelectedWeapon.ID == EnemyCombat.SelectedWeapon.ID;
                 SetTurnWin(sameWeapon);
             }
         }

@@ -6,5 +6,10 @@ namespace Items
     public class ItemWeaponObj : ItemObj<ItemWeapon>
     {
 
+        [ContextMenu(nameof(AutoAssignIDs))]
+        public override void AutoAssignIDs()
+        {
+            base.AutoAssignIDs();
+        }
     }
 }

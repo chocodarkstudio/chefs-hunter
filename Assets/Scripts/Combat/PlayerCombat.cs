@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [field: SerializeField] public Player Player { get; protected set; }
+    [SerializeField] GenericStateMachine stateMachine;
+
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] UIWeaponSelector uiWeaponSelector;
 
+    [field: SerializeField] public Timer SelectWeaponTimer { get; protected set; }
     public ItemWeapon SelectedWeapon { get; protected set; }
 
     private void Awake()
@@ -17,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
         CombatManager.onTurnStep.AddListener(OnTurnStep);
 
         uiWeaponSelector.onWeaponSelected.AddListener(OnWeaponSelected);
+        SelectWeaponTimer.onCompleted.AddListener(OnSelectWeaponTimerOver);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        SelectWeaponTimer.Update();
         if (Input.GetKeyDown(KeyCode.E))
             GameManager.CombatManager.NextStep();
     }
@@ -47,6 +52,7 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("OnCombatEnded");
         playerMovement.UnlockInput();
         Player.UIInventoryPlayer.Show(true);
+        uiWeaponSelector.Show(false);
     }
 
     void OnTurnStep(CombatTurn combatTurn)
@@ -57,6 +63,12 @@ public class PlayerCombat : MonoBehaviour
             SelectedWeapon = null;
             uiWeaponSelector.Show(true);
             Debug.Log("Select a weapon!");
+            SelectWeaponTimer.Restart();
+        }
+        else
+        {
+            uiWeaponSelector.Show(false);
+            SelectWeaponTimer.Stop();
         }
 
         // The player loses
@@ -97,6 +109,17 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log($"Player SelectedWeapon: {weapon.Name}");
 
         SelectedWeapon = weapon;
+
+        if (GameManager.CombatManager.Sequence.CurrentTurn.step == CombatTurnSteps.SelectWeapon)
+        {
+            GameManager.CombatManager.NextStep();
+        }
+    }
+
+    void OnSelectWeaponTimerOver()
+    {
+        if (!GameManager.CombatManager.InCombat)
+            return;
 
         if (GameManager.CombatManager.Sequence.CurrentTurn.step == CombatTurnSteps.SelectWeapon)
         {

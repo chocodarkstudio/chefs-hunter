@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [SerializeField] CombatManager combatManager;
     public static CombatManager CombatManager => Singleton.combatManager;
+    [SerializeField] OrderCounter orderCounter;
+    public static OrderCounter OrderCounter => Singleton.orderCounter;
 
     [SerializeField] Transform uiTopLevel;
     public static Transform UITopLevel => Singleton.uiTopLevel;

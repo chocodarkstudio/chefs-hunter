@@ -1,6 +1,5 @@
 using Items;
 using System;
-using System.Collections;
 using UnityEngine.Events;
 
 
@@ -10,7 +9,7 @@ public class ItemStorage<T>
     protected readonly T[] items;
     public int Count { get; private set; } = 0;
 
-    public IEnumerable Enumerable => items;
+    public T[] All => items;
 
     // Events
     public readonly UnityEvent onChange = new();

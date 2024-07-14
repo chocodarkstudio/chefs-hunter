@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] GenericStateMachine stateMachine;
+    [SerializeField] SpriteRenderer playerSprite;
+
     Vector3 speed = Vector3.zero;
     [SerializeField] float moveSpeed = 3.5f;
     [SerializeField] float smoothness = 0.8f;
@@ -14,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
+
 
     void Update()
     {
@@ -39,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.z = Input.GetAxisRaw("Vertical");
 
+            if (movement.x != 0)
+                playerSprite.flipX = movement.x > 0;
+
             // Normalize diagonal movement
             if (movement.magnitude > 1)
                 movement.Normalize();
@@ -47,8 +55,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // no speed
-        if (speed.magnitude == 0)
-            return;
+        if (speed.magnitude <= 0.5f)
+            stateMachine.Stop("walk");
+        else
+            stateMachine.Play("walk", overwrite: false, fade: false);
 
         rb.MovePosition(rb.position + Time.deltaTime * moveSpeed * speed);
     }

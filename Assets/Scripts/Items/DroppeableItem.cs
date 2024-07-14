@@ -16,7 +16,7 @@ public class DroppeableItem : MonoBehaviour
     {
         if (itemObj != null)
         {
-            Item = itemObj.Item.Copy();
+            Item = itemObj.Get;
             UpdateItemData();
         }
 
@@ -50,8 +50,8 @@ public class DroppeableItem : MonoBehaviour
         spawnTween = Visuals.DOLocalJump(
             endValue: Vector3.zero,
             jumpPower: 0.5f,
-            numJumps: 2,
-            duration: 0.4f
+            numJumps: 1,
+            duration: 0.3f
         );
         return this;
     }

@@ -36,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
 
         List<ItemIngredient> discardedItems = new();
 
-        foreach (ItemIngredient ingredient in ingredientsStorage.Enumerable)
+        foreach (ItemIngredient ingredient in ingredientsStorage.All)
         {
             if (ingredient == null)
                 continue;

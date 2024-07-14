@@ -16,7 +16,7 @@ namespace UIItem_NM
         [field: SerializeField] public string SecondaryText { get; set; }
     }
 
-    public class UIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+    public class UIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public UIItemData Item { get; protected set; }
 
@@ -135,6 +135,16 @@ namespace UIItem_NM
             if (eventData.pointerDrag == null)
                 return;
 
+        }
+
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
+            UIAnim.Scale(IconImg.transform, Vector3.one * 1.1f, duration: 0.08f);
+        }
+
+        public virtual void OnPointerExit(PointerEventData eventData)
+        {
+            UIAnim.Scale(IconImg.transform, Vector3.one, duration: 0.08f);
         }
 
         #endregion

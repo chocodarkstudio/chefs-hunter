@@ -235,33 +235,6 @@ namespace GameUtils
         public static float SnapValue(float value, float size, float pos = 0) => Mathf.Round((value - pos) / size) * size + pos;
 
 
-        public static Vector3 GetRandomRotationV(Vector3 axis, float degress = 360)
-        {
-            return Vector3.Scale(axis * degress, new(
-                UnityEngine.Random.value,
-                UnityEngine.Random.value,
-                UnityEngine.Random.value));
-        }
-        public static Quaternion GetRandomRotationQ(Vector3 axis, float degress = 360)
-            => Quaternion.Euler(GetRandomRotationV(axis, degress));
-
-        public static Vector3 GetRandomPosition(float min = -10, float max = 10)
-        {
-            return new(
-                UnityEngine.Random.Range(min, max),
-                UnityEngine.Random.Range(min, max),
-                UnityEngine.Random.Range(min, max));
-        }
-
-        public static Vector3 GetRandomPositionInBounds(Bounds bounds)
-        {
-            float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
-            float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
-            float randomZ = UnityEngine.Random.Range(bounds.min.z, bounds.max.z);
-
-            return new Vector3(randomX, randomY, randomZ);
-        }
-
         public static bool IsAnyPointNear(Vector3 point, float distance, ref List<Vector3> points)
         {
             for (int i = 0; i < points.Count; i++)
@@ -326,6 +299,50 @@ namespace GameUtils
         public static Vector4 ToVector4(this Quaternion q) => new(q.x, q.y, q.z, q.w);
         public static Quaternion ToQuaternion(this Vector4 v) => new(v.x, v.y, v.z, v.w);
 
+        #endregion
+
+        #region Randomizers
+        public static Vector3 GetRandomRotationV(Vector3 axis, float degress = 360)
+        {
+            return Vector3.Scale(axis * degress, new(
+                UnityEngine.Random.value,
+                UnityEngine.Random.value,
+                UnityEngine.Random.value));
+        }
+        public static Quaternion GetRandomRotationQ(Vector3 axis, float degress = 360)
+            => Quaternion.Euler(GetRandomRotationV(axis, degress));
+
+        public static Vector3 GetRandomPosition(float min = -10, float max = 10)
+        {
+            return new(
+                UnityEngine.Random.Range(min, max),
+                UnityEngine.Random.Range(min, max),
+                UnityEngine.Random.Range(min, max));
+        }
+
+        public static Vector3 GetRandomPositionInBounds(Bounds bounds)
+        {
+            float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
+            float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
+            float randomZ = UnityEngine.Random.Range(bounds.min.z, bounds.max.z);
+
+            return new Vector3(randomX, randomY, randomZ);
+        }
+
+        /// <summary>
+        /// GUtils Extension </summary>
+        public static T GetOneRandom<T>(this List<T> values)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, values.Count);
+            return values[randomIndex];
+        }
+        /// <summary>
+        /// GUtils Extension </summary>
+        public static T GetOneRandom<T>(this T[] values)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, values.Length);
+            return values[randomIndex];
+        }
         #endregion
 
         #region Editor

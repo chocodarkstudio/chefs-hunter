@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Knife
   m_EditorClassIdentifier: 
   <Item>k__BackingField:
-    <ID>k__BackingField: 1
+    <ID>k__BackingField: 0
     <Name>k__BackingField: Knife
     <Icon>k__BackingField: {fileID: 1727210752, guid: f1f2af6df4163704a99cc3cd188dead8,
       type: 3}
+    <PrimaryColor>k__BackingField: {r: 1, g: 0.19607845, b: 0.19607845, a: 1}
     <Droppeable>k__BackingField: 0
-    <Attack>k__BackingField: []
-    <Defense>k__BackingField: []
+    weaponSelectorIcon: {fileID: -387323915, guid: 8ac7d9fbaad319341b22118696e2e8a7,
+      type: 3}

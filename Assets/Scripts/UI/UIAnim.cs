@@ -96,7 +96,7 @@ namespace UIAnimShortcuts
                 return null;
 
             Vector3 initialValue = Vector3.one;
-            Vector3 targetValue = Vector3.one * 0.7f;
+            Vector3 targetValue = Vector3.one * 0.5f;
 
             // set initial value
             t.localScale = initialValue;

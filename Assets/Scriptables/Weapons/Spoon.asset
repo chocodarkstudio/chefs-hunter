@@ -17,6 +17,7 @@ MonoBehaviour:
     <Name>k__BackingField: Spoon
     <Icon>k__BackingField: {fileID: -1920517164, guid: f1f2af6df4163704a99cc3cd188dead8,
       type: 3}
+    <PrimaryColor>k__BackingField: {r: 0.38431376, g: 0.81568635, b: 0.909804, a: 1}
     <Droppeable>k__BackingField: 0
-    <Attack>k__BackingField: []
-    <Defense>k__BackingField: []
+    weaponSelectorIcon: {fileID: 1043971068, guid: dc16c496d0eaa6d47b38e23258e78594,
+      type: 3}

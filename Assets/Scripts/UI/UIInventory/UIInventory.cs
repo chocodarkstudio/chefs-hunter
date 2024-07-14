@@ -28,7 +28,7 @@ public class UIInventory<T> : MonoBehaviour
             return;
 
         List<UIItemData> items = new();
-        foreach (T item in itemStorage.Enumerable)
+        foreach (T item in itemStorage.All)
         {
             if (item == null)
             {
