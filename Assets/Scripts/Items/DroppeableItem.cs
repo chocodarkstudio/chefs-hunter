@@ -6,9 +6,12 @@ public class DroppeableItem : MonoBehaviour
 {
     [field: SerializeField] public virtual Transform Visuals { get; protected set; }
     [field: SerializeField] public virtual SpriteRenderer SpriteRenderer { get; protected set; }
+    [field: SerializeField] public virtual SpriteRenderer NotTakeableIcon { get; protected set; }
 
     [field: SerializeField] public virtual Item Item { get; protected set; }
     [SerializeField] ItemObj<ItemIngredient> itemObj;
+    [field: SerializeField] public virtual bool Takeable { get; set; } = true;
+    [field: SerializeField] public virtual Timer DestroyTimer { get; protected set; }
 
     Tween spawnTween;
 
@@ -20,6 +23,25 @@ public class DroppeableItem : MonoBehaviour
             UpdateItemData();
         }
 
+        DestroyTimer.onCompleted.AddListener(() =>
+        {
+            Destroy(gameObject);
+        });
+        DestroyTimer.Restart();
+    }
+
+    private void Start()
+    {
+        if (!Takeable)
+        {
+            SpriteRenderer.color = new Color(1, 1, 1, 0.8f);
+            NotTakeableIcon.gameObject.SetActive(true);
+        }
+    }
+
+    private void Update()
+    {
+        DestroyTimer.Update();
     }
 
     public static DroppeableItem CreateNew(Item item, Vector3 position)
@@ -28,11 +50,10 @@ public class DroppeableItem : MonoBehaviour
         if (item == null)
             return null;
 
-        GameObject gm = Instantiate(GameManager.DroppeableItemPrefab);
+        GameObject gm = LevelLoader.CreateOnLevel(GameManager.DroppeableItemPrefab, position);
         if (!gm.TryGetComponent(out DroppeableItem droppeable))
             return null;
 
-        droppeable.transform.position = position;
         droppeable.Item = item.Copy();
         droppeable.UpdateItemData();
         return droppeable;

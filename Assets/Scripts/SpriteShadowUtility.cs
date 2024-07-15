@@ -1,13 +1,18 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class SpriteShadowUtility
 {
     private const string MaterialPath = "Assets/Materials/SpriteShadows/SpriteShadow.mat";
 
+#if UNITY_EDITOR
     [MenuItem("Tools/Set SpriteShadow to Selected Objects")]
+#endif
     private static void AddSpriteRendererToSelectedObjects()
     {
+#if UNITY_EDITOR
         Material material = AssetDatabase.LoadAssetAtPath<Material>(MaterialPath);
 
         if (material == null)
@@ -28,10 +33,12 @@ public class SpriteShadowUtility
                     obj.AddComponent<AlignToCam>();
             }
         });
+#endif
     }
 
     private static void ProcessSelectedObjects(System.Action<GameObject> processAction)
     {
+#if UNITY_EDITOR
         GameObject[] selectedObjects = Selection.gameObjects;
 
         if (selectedObjects.Length == 0)
@@ -44,5 +51,6 @@ public class SpriteShadowUtility
         {
             processAction(obj);
         }
+#endif
     }
 }

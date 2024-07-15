@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ba9d50b0286fe499331db11ee77558, type: 3}
+  m_Name: GeneralClipsPreset
+  m_EditorClassIdentifier: 
+  enemyHitClip: {fileID: 8300000, guid: 9e568d6bb6ad1144b8975be9bb6f851a, type: 3}
+  playerHitClip: {fileID: 8300000, guid: 8e63e94b8d78fca439a3adbe9bcf58c5, type: 3}
+  customerBellClip: {fileID: 8300000, guid: 7c06148fb7e28974a9ba01aadb3e9b7e, type: 3}
+  missHitClip: {fileID: 8300000, guid: 5972d63f59b920e4d9544e24b51c4b66, type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: 40eee03bc70f9964d9adb3933d17320c, type: 3}
+  completeCustomerClip: {fileID: 8300000, guid: dd04a0e88fbca104da97e22784cfae98,
+    type: 3}
+  carboardOpenFlapClip: {fileID: 8300000, guid: b389385c6d7fdf84b9415702ba976a64,
+    type: 3}

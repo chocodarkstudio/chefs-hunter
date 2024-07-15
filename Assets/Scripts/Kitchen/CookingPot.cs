@@ -15,6 +15,9 @@ public class CookingPot : MonoBehaviour
 
     public void CompleteMatchingRecipes(ItemStorage<ItemIngredient> storage)
     {
+        if (GameManager.OrderCounter == null)
+            return;
+
         foreach (Customer customer in GameManager.OrderCounter.Customers)
         {
             // customer is not ordering

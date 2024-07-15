@@ -14,6 +14,10 @@ public class OrderCounter : MonoBehaviour
     public readonly UnityEvent<Customer> onCustomerCompleted = new();
     public readonly UnityEvent<Customer> onCustomerCanceled = new();
 
+    private void Start()
+    {
+        uiRecipeItem.SetShow(false);
+    }
 
     public void OnCustomerOrdered(Customer customer)
     {
@@ -24,6 +28,7 @@ public class OrderCounter : MonoBehaviour
             ShowCustomerLeastTimeOrder();
 
         Debug.Log($"OnCustomerOrdered {customer.Order.Name}");
+        GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.customerBellClip);
     }
     public void OnCustomerCompleted(Customer customer)
     {
@@ -34,6 +39,7 @@ public class OrderCounter : MonoBehaviour
             ShowCustomerLeastTimeOrder();
 
         Debug.Log($"OnCustomerCompleted {customer.Order.Name}");
+        GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.completeCustomerClip);
     }
     public void OnCustomerCanceled(Customer customer)
     {
@@ -56,6 +62,17 @@ public class OrderCounter : MonoBehaviour
         customer.CompleteOrder();
     }
 
+    public void CancelAllOrders()
+    {
+        foreach (Customer ctmr in Customers)
+        {
+            // only ordering customers
+            if (!ctmr.IsOrdering)
+                continue;
+
+            ctmr.CancelOrder();
+        }
+    }
 
     #region Display customer order
     public void ShowCustomerOrder(Customer ctmr)

@@ -9,14 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 3.5f;
     [SerializeField] float smoothness = 0.8f;
 
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
     public bool IsLocked { get; protected set; }
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 
 
 
@@ -33,10 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovementUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-        }
 
         if (!IsLocked)
         {
@@ -80,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PushAway(Vector3 direction, float forceMultiplier = 1f)
     {
+        direction.y = 0;
         speed = direction.normalized * forceMultiplier;
     }
 }

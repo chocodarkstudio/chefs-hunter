@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e4faac8239ea34f9b20864b57202ec, type: 3}
+  m_Name: UIClipsPreset
+  m_EditorClassIdentifier: 
+  buttonClip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  operationErrorClip: {fileID: 8300000, guid: 2bbaf023a0290984eab3ea2b0a36e922, type: 3}
+  bubbleIconShowClip: {fileID: 8300000, guid: d8a8101453322c14d89236bc1a67e678, type: 3}
+  starPopupJumpClip: {fileID: 8300000, guid: b64c011aa659e2d4b9704933fc162171, type: 3}
+  financeParticlePopClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a,
+    type: 3}
+  financeParticleBipClip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab,
+    type: 3}
+  openScreenTransitionClip: {fileID: 8300000, guid: 54c87367e69395b48b9db73a26a33756,
+    type: 3}
+  closeScreenTransitionClip: {fileID: 8300000, guid: 871517aada8cb8c4e84ebebfd7883e7b,
+    type: 3}
+  sliderTickClip: {fileID: 8300000, guid: b49516c4dcd7beb42af5277cb3691a38, type: 3}
+  sliderSnapClip: {fileID: 0}
+  keyboardOpenClip: {fileID: 8300000, guid: 33a655874cc63764d84a978fc69fa166, type: 3}
+  keyboardCloseClip: {fileID: 8300000, guid: 33a655874cc63764d84a978fc69fa166, type: 3}
+  keyboardKeyClip: {fileID: 8300000, guid: b49516c4dcd7beb42af5277cb3691a38, type: 3}

@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <Type>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
+      objectReference: {fileID: 11400000, guid: f2f3a84b62b2ca64bbf9390c1a6e8436,
         type: 2}
     - target: {fileID: 611192501184799858, guid: 294569d6a3d42b14da24767ef330daec,
         type: 3}
@@ -22,7 +22,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <Drops>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 09b68d52f392bb14980b818824334c81,
+      objectReference: {fileID: 11400000, guid: f2f3a84b62b2ca64bbf9390c1a6e8436,
         type: 2}
     - target: {fileID: 611192501184799858, guid: 294569d6a3d42b14da24767ef330daec,
         type: 3}
@@ -115,7 +115,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <WeaknessesWeapons>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 617ba3dc4a7eadc46867cf2537e8b6a0,
+      objectReference: {fileID: 11400000, guid: dcace85aca647a341bd239d9b3037429,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294569d6a3d42b14da24767ef330daec, type: 3}

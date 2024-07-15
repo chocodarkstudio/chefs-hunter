@@ -13,6 +13,7 @@ public class Timer
 
     public float ElapsedTime => Time.time - startedTime;
     public float RemainingTime => TimerSeconds - ElapsedTime;
+    public float RemainingPercent => IsOver ? 1f : ElapsedTime / TimerSeconds;
 
     public bool IsOver => RemainingTime <= 0;
     public bool IsCompleted { get; protected set; } = true;

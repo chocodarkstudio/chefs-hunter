@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1977054021607864579, guid: 21b8eca3c8e3efa469bf39f804457cc6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c38e2c1c30528b24a9538aa24b2837ad, type: 2}
     - target: {fileID: 6101407707158306287, guid: 21b8eca3c8e3efa469bf39f804457cc6,
         type: 3}
       propertyPath: orderRecipeObj

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b829f7f0f8d352b4eb8b052f1eaee0a6, type: 3}
+  m_Name: MusicClipsPreset
+  m_EditorClassIdentifier: 
+  scoreSummaryMusicClip: {fileID: 8300000, guid: 28d1fa6c17d2e9545bbbca049840486f,
+    type: 3}
+  menuClips:
+  - {fileID: 8300000, guid: 4eda9af0d663be148bd59800909b2021, type: 3}
+  - {fileID: 8300000, guid: 41d915b11864d2346946e8fd2349f14a, type: 3}
+  - {fileID: 8300000, guid: f48131f1fc0ed0f42a6db224dfbc5f35, type: 3}
+  - {fileID: 8300000, guid: e52f1f9bca3026f469ca2d304db06c52, type: 3}
+  - {fileID: 8300000, guid: d3d23fce65ed69f4c831aadfc536728e, type: 3}
+  - {fileID: 8300000, guid: b5255a4a3b78db242968adbc016f8719, type: 3}
+  - {fileID: 8300000, guid: 3f6acc458f212404d9f54a7144cc9ad0, type: 3}
+  - {fileID: 8300000, guid: dc0ddd2ea750f50488e777f858f2332d, type: 3}
+  - {fileID: 8300000, guid: d71a2957fe3fecc49b54382ffd50be45, type: 3}
+  - {fileID: 8300000, guid: 83c277a2fee72994c8f2cb42713e8c15, type: 3}
+  - {fileID: 8300000, guid: 863316f27304e8945bc8ed14111e116b, type: 3}
+  roomClips:
+  - {fileID: 8300000, guid: f48131f1fc0ed0f42a6db224dfbc5f35, type: 3}
+  - {fileID: 8300000, guid: e52f1f9bca3026f469ca2d304db06c52, type: 3}
+  - {fileID: 8300000, guid: d3d23fce65ed69f4c831aadfc536728e, type: 3}
+  - {fileID: 8300000, guid: b5255a4a3b78db242968adbc016f8719, type: 3}
+  - {fileID: 8300000, guid: 3f6acc458f212404d9f54a7144cc9ad0, type: 3}
+  - {fileID: 8300000, guid: d71a2957fe3fecc49b54382ffd50be45, type: 3}
+  - {fileID: 8300000, guid: a3bb586de238eaa4388fb13f14033ee2, type: 3}
+  - {fileID: 8300000, guid: 41bb76d6494ccb349abef02cef104785, type: 3}
+  storeClips: []
+  catRoomClips:
+  - {fileID: 8300000, guid: 55ebdda95da7d9c49afc5b871670f9f9, type: 3}
+  - {fileID: 8300000, guid: 9b449278e92a8174384531e2e1f84fac, type: 3}
+  - {fileID: 8300000, guid: b017c42db9b77c24d8ec20686309bac7, type: 3}
+  - {fileID: 8300000, guid: d597d99764362b346949fc0a55d74143, type: 3}
+  - {fileID: 8300000, guid: 31c6c24b416619c4d856c7e6c2e92563, type: 3}
+  petTutorialClip: {fileID: 8300000, guid: 863316f27304e8945bc8ed14111e116b, type: 3}
+  paintTutorialClip: {fileID: 8300000, guid: a3bb586de238eaa4388fb13f14033ee2, type: 3}

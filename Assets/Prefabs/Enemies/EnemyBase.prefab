@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 3652416800536215468}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0.398, z: 0.586}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7641807193812721414}
@@ -194,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3524746620792795196}
   - component: {fileID: 611192501184799858}
+  - component: {fileID: 3173822922795912145}
   - component: {fileID: 7928971446630691538}
   - component: {fileID: 56623231229277694}
   - component: {fileID: 7641807194957719666}
@@ -236,6 +237,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: {fileID: 0}
   <Drops>k__BackingField: []
+--- !u!114 &3173822922795912145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395349224235794800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb827ef4609c98469bea833a4e585e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Enemy>k__BackingField: {fileID: 611192501184799858}
+  stateMachine: {fileID: 7573599696457031581}
+  enemySprite: {fileID: 7641807193383047534}
+  moveSpeed: 0.5
+  smoothness: 0.8
+  rb: {fileID: 56623231229277694}
+  targetReachThreshold: 0.5
+  randomRange: 2
+  waitTime: 5
 --- !u!114 &7928971446630691538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5617de83a6ac43924d63cee2ee68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyMovement: {fileID: 3173822922795912145}
   stateMachine: {fileID: 7573599696457031581}
   attackHighlight: {fileID: 818845425846394123}
   attackHighlightRotateSpeed: 5
@@ -279,10 +302,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 1.2
+  m_Radius: 0.8
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7573599696457031581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +414,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1545362568, guid: 391acb36dd9425645bd5b6b8eb6bd36c, type: 3}
+  m_Sprite: {fileID: 1960608439, guid: 1743c3ab8db086148b7eb02f2ae7ec22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

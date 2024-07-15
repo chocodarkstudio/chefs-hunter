@@ -31,6 +31,10 @@ public class Customer : MonoBehaviour
 
         StartOrderTimer.onCompleted.AddListener(() =>
         {
+            // game over
+            if (GameManager.GameSequencer.GameTimer.IsOver)
+                return;
+
             if (orderRecipeObj != null)
                 NewOrder(orderRecipeObj.Get);
             else

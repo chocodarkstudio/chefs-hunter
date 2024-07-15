@@ -7,16 +7,23 @@ using UnityEngine;
 public class UIInventoryKitchenTable : UIInventory<ItemIngredient>
 {
     [SerializeField] GameObject mainPanel;
-    [SerializeField] KitchenTableInventory kitchenTableInventory;
+    public KitchenTableInventory kitchenTableInventory;
 
 
     public bool ShowState { get; private set; }
     Tween panelScaleTween;
 
+
     protected override void Start()
     {
         itemStorage = kitchenTableInventory.ingredientsStorage;
         base.Start();
+
+        if (TryGetComponent(out UIFollowWorldTarget uiFollow))
+        {
+            uiFollow.SetFollowTarget(kitchenTableInventory.transform);
+            uiFollow.StartFollow();
+        }
     }
 
 

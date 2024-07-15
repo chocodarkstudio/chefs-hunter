@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae3c1ca58be4c14c98efc2e8aa99818, type: 3}
+  m_Name: Milas
+  m_EditorClassIdentifier: 
+  <Item>k__BackingField:
+    <ID>k__BackingField: 0
+    <Name>k__BackingField: Hamburger
+    <Icon>k__BackingField: {fileID: 21300000, guid: 2dc4fdeeaa7b56d4c93a1a6de00bc4f0,
+      type: 3}
+    <PrimaryColor>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
+    <Droppeable>k__BackingField: 0
+    <Ingredients>k__BackingField:
+    - {fileID: 11400000, guid: b3b88eca1497a7a4dba72e968c4bdfe2, type: 2}
+    - {fileID: 11400000, guid: f1d504b602cb4cb43999140474fd137f, type: 2}
+    - {fileID: 11400000, guid: f2f3a84b62b2ca64bbf9390c1a6e8436, type: 2}

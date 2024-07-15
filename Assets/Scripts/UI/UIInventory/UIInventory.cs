@@ -98,9 +98,9 @@ public class UIInventory<T> : MonoBehaviour
     protected virtual void SwapInventoriesSlots(UIGridItem fromSlot, UIGridItem targetSlot)
     {
         Transform targetParent = targetSlot.ItemsHandler.transform.parent;
-
+        UIInventory<T> otherUIInventory;
         // Other UIInventory of the same item type
-        if (!targetParent.TryGetComponent(out UIInventory<T> otherUIInventory))
+        if (!targetParent.TryGetComponent(out otherUIInventory) && !targetParent.parent.TryGetComponent(out otherUIInventory))
             return;
 
         T myItem = this.GetSlotItem(fromSlot);

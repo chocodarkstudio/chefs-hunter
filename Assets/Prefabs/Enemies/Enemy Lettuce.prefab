@@ -106,6 +106,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 800878594, guid: dbe7c6785c8a70d4a9285f2e2c99db5b,
         type: 3}
+    - target: {fileID: 7641807193383047535, guid: 294569d6a3d42b14da24767ef330daec,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641807193383047535, guid: 294569d6a3d42b14da24767ef330daec,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7928971446630691538, guid: 294569d6a3d42b14da24767ef330daec,
         type: 3}
       propertyPath: <WeaknessesWeapons>k__BackingField.Array.size

@@ -13,7 +13,7 @@ namespace Items
         /// <summary>
         /// Get a copy of the item </summary>
         public T Get => Item.Copy();
-
+#if UNITY_EDITOR
         private void OnValidate()
         {
             // Initialize
@@ -79,7 +79,7 @@ namespace Items
 
             return itemsObjs;
         }
-
+#endif
 
     }
 }

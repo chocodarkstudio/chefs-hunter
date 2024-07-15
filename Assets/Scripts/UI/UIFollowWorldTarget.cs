@@ -104,11 +104,19 @@ public class UIFollowWorldTarget : MonoBehaviour
     public void SetSmoothness(float sm) => this.smoothness = sm;
 
 
+    public void UpdatePosition()
+    {
+        if (target != null)
+            MoveTo(target.position);
+        else
+            MoveTo(targetPos.Value);
+    }
+
     IEnumerator FollowTransform()
     {
         while (target != null)
         {
-            MoveTo(target.position);
+            MoveSmoothTo(target.position);
             yield return null;
         }
     }
@@ -117,7 +125,7 @@ public class UIFollowWorldTarget : MonoBehaviour
     {
         while (targetPos.HasValue)
         {
-            MoveTo(targetPos.Value);
+            MoveSmoothTo(targetPos.Value);
             yield return null;
         }
 
@@ -127,12 +135,18 @@ public class UIFollowWorldTarget : MonoBehaviour
     {
         Vector3 uiPos = CameraController.MainCamera.WorldToScreenPoint(worldPosition + worldOffset);
         Vector3 newPos = uiPos + (Vector3)uiOffset;
+        transform.position = newPos;
+    }
+
+    void MoveSmoothTo(Vector3 worldPosition)
+    {
+        Vector3 uiPos = CameraController.MainCamera.WorldToScreenPoint(worldPosition + worldOffset);
+        Vector3 newPos = uiPos + (Vector3)uiOffset;
 
         Vector3 diff = newPos - transform.position;
 
         transform.position += diff * smoothness;
     }
-
 
     #region static creation methods
     public static UIFollowWorldTarget Follow(GameObject obj, Vector3 target)

@@ -1,3 +1,4 @@
+using GameUtils;
 using Items;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,13 +21,14 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*
+        if ( Input.GetKeyDown(KeyCode.Q))
         {
             ItemIngredient item = ingredientsStorage.TakeSlot(0);
             DroppeableItem.CreateNew(item, transform.position + Vector3.forward * 1)
                 .SpawnAnim(transform.position);
         }
-
+        */
     }
 
     public void DiscardPlayerFirstItems(int amount)
@@ -48,6 +50,12 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (ItemIngredient ingredient in discardedItems)
         {
+            Vector3 randomPos = GUtils.GetRandomPosition(-1, 1f);
+            randomPos.y = 0;
+            DroppeableItem droppeableItem = DroppeableItem.CreateNew(ingredient.Copy(), transform.position + randomPos);
+            droppeableItem.SpawnAnim(transform.position);
+            droppeableItem.Takeable = false;
+
             ingredientsStorage.RemoveRef(ingredient);
         }
     }

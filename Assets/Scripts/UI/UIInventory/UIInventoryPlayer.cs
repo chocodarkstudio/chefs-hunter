@@ -8,6 +8,7 @@ public class UIInventoryPlayer : UIInventory<ItemIngredient>
 {
     [SerializeField] GameObject mainPanel;
     [SerializeField] PlayerInventory playerInventory;
+    [field: SerializeField] public UIFollowWorldTarget UIFollow { get; protected set; }
 
     public bool ShowState { get; private set; }
     Tween panelScaleTween;

@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class AlignToCam : MonoBehaviour
@@ -34,7 +36,7 @@ public class AlignToCam : MonoBehaviour
         spriteRenderer.sortingOrder = (int)(pivotSortPoint.position.y * 10);
     }
 
-
+#if UNITY_EDITOR
     [MenuItem("Tools/AlignToCam SelectedObjects")]
     private static void AlignToCamSelectedObjects()
     {
@@ -56,4 +58,5 @@ public class AlignToCam : MonoBehaviour
             alignToCam.Align(cameraT);
         }
     }
+#endif
 }

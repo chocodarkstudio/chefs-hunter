@@ -33,26 +33,39 @@ public class EnemySpawner : MonoBehaviour
         if (SpawnedEnemies.Count >= MaxSpawnedEnemiesCount)
             return null;
 
-        GameObject gm = Instantiate(enemyPrefab);
+        GameObject gm = LevelLoader.CreateOnLevel(enemyPrefab, position);
         if (!gm.TryGetComponent(out Enemy enemy))
             return null;
 
-        enemy.transform.position = position;
         SpawnedEnemies.Add(enemy);
+
+        enemy.EnemySpawner = this;
+
         return enemy;
     }
 
     public Enemy SpawnEnemy(GameObject enemyPrefab)
     {
-        Vector3 randomPos = GUtils.GetRandomPositionInBounds(Bounds);
-        randomPos.y = 0;
-        return SpawnEnemy(enemyPrefab, transform.position + randomPos);
+        Vector3 randomPos = GetRandomBoundsPoint();
+        return SpawnEnemy(enemyPrefab, randomPos);
     }
 
     public Enemy SpawnRandomEnemy()
     {
         GameObject enemyPrefab = enemiesPrefabs.GetOneRandom();
         return SpawnEnemy(enemyPrefab);
+    }
+
+    public Vector3 GetRandomBoundsPoint()
+    {
+        Vector3 randomPos = GUtils.GetRandomPositionInBounds(Bounds);
+        randomPos.y = 0;
+        return transform.position + randomPos;
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        SpawnedEnemies.Remove(enemy);
     }
 
     private void OnDrawGizmosSelected()

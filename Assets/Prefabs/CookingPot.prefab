@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3860829141203074744}
   - component: {fileID: 2310508282992666214}
   - component: {fileID: 4565003967364738207}
-  - component: {fileID: 4472200784964606179}
   - component: {fileID: 703697968791220093}
   m_Layer: 0
   m_Name: CookingPot
@@ -64,20 +63,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &4472200784964606179
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249578057000795247}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.35
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!65 &703697968791220093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116,14 +101,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528872506099531385}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0.33349368, z: -0.125}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
+  m_LocalPosition: {x: -0.41500044, y: 1.53, z: 0.5019996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5066604862455673412}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2702416441050618147
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -165,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3042b019b052942a1baf7aa49d7ca6bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3743fc939e65f3f4496335fbf2bac235, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85035ac89f26e8947a1953357c32f055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivotSortPoint: {fileID: 0}
   alignAxis: {x: 0, y: 0, z: 0}
 --- !u!1 &1018093161774344337
 GameObject:

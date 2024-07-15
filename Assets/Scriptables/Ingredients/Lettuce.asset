@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Lettuce
   m_EditorClassIdentifier: 
   <Item>k__BackingField:
-    <ID>k__BackingField: 0
+    <ID>k__BackingField: 1
     <Name>k__BackingField: Lettuce
     <Icon>k__BackingField: {fileID: 21300000, guid: f5b150b983435a4418a479440dbdb8ef,
       type: 3}
+    <PrimaryColor>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
     <Droppeable>k__BackingField: 0

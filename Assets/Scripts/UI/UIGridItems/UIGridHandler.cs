@@ -79,6 +79,14 @@ namespace UIGridItems
 
         public UIGridItem InitializePreviewItem(UIItemData item)
         {
+            if (previewItemContainer == null)
+            {
+                if (GameManager.UITopLevel == null)
+                    return null;
+
+                previewItemContainer = GameManager.UITopLevel;
+            }
+
             // create new if dosnt exists
             if (previewItem == null)
             {
