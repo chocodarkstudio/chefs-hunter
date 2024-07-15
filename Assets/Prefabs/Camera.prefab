@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 556017689704712271}
   - component: {fileID: 556017689704712270}
   - component: {fileID: 556017689704712269}
-  - component: {fileID: 556017689704712256}
+  - component: {fileID: 1418184979}
   m_Layer: 0
   m_Name: Main Camera InnerPivot
   m_TagString: MainCamera
@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556017689704712268}
-  m_LocalRotation: {x: 0.25881895, y: -0, z: -0, w: 0.9659259}
-  m_LocalPosition: {x: 0, y: 4, z: -7}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 556017690069929651}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!20 &556017689704712270
 Camera:
   m_ObjectHideFlags: 0
@@ -85,7 +85,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556017689704712268}
   m_Enabled: 1
---- !u!114 &556017689704712256
+--- !u!114 &1418184979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

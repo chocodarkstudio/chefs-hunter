@@ -100,6 +100,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Wheat
       objectReference: {fileID: 0}
+    - target: {fileID: 7641807193383047534, guid: 294569d6a3d42b14da24767ef330daec,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1074985800, guid: 99ea5f32cf7784245b87af15d0722175,
+        type: 3}
     - target: {fileID: 7928971446630691538, guid: 294569d6a3d42b14da24767ef330daec,
         type: 3}
       propertyPath: <WeaknessesWeapons>k__BackingField.Array.size
