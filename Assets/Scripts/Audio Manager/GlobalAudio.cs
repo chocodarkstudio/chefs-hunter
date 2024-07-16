@@ -9,21 +9,22 @@ public class GlobalAudio : MonoBehaviour
     [Header("Sources")]
     [SerializeField]
     AudioSource musicAudioSource;
+
     [SerializeField]
     AudioSource effectsAudioSource;
 
 
     // Effect Volume
-    float effectVolume = 1;
+    static float effectVolume = 1;
     public static float EffectVolume
     {
-        get => Singleton.effectVolume;
+        get => effectVolume;
         set
         {
-            Singleton.effectVolume = value;
+            effectVolume = value;
 
             // apply to audio source
-            if (Singleton.effectsAudioSource != null)
+            if (Singleton != null && Singleton.effectsAudioSource != null)
                 Singleton.effectsAudioSource.volume = value;
 
             onEffectVolumeChange.Invoke(value);
@@ -31,16 +32,16 @@ public class GlobalAudio : MonoBehaviour
     }
 
     // Music Volume
-    float musicVolume = 1;
+    static float musicVolume = 1;
     public static float MusicVolume
     {
-        get => Singleton.musicVolume;
+        get => musicVolume;
         set
         {
-            Singleton.musicVolume = value;
+            musicVolume = value;
 
             // apply to audio source
-            if (Singleton.musicAudioSource != null)
+            if (Singleton != null && Singleton.musicAudioSource != null)
                 Singleton.musicAudioSource.volume = value;
 
             onMusicVolumeChange.Invoke(value);

@@ -2,9 +2,10 @@ using DG.Tweening;
 using ScreenTransition;
 using UIAnimShortcuts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIGameTimer : MonoBehaviour
+public class UIGameTimer : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject mainPanel;
 
@@ -92,5 +93,33 @@ public class UIGameTimer : MonoBehaviour
                 return;
 
         timerIcon.sprite = timerIconVariants[index];
+    }
+
+    public void OnTimerStarted()
+    {
+        // prevent run multiple animations
+        if (panelScaleTween != null)
+            panelScaleTween.Kill();
+
+        // restore scale
+        panelScaleTween = UIAnim.Scale(mainPanel.transform, TransitionState.Open);
+    }
+
+    public void OnTimerOver()
+    {
+        // prevent run multiple animations
+        if (panelScaleTween != null)
+            panelScaleTween.Kill();
+
+        panelScaleTween = UIAnim.ClickMeInfinity(mainPanel.transform);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // no game sequencer found
+        if (GameManager.GameSequencer == null)
+            return;
+
+        GameManager.GameSequencer.RestartTimer();
     }
 }

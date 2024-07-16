@@ -7,16 +7,26 @@ public class GameSequencer : MonoBehaviour
 
     private void Start()
     {
-        GameTimer.Restart();
-        GameTimer.onCompleted.AddListener(() =>
-        {
-            GameManager.OrderCounter.CancelAllOrders();
-        });
+        GameTimer.onCompleted.AddListener(OnTimerOver);
+        GameTimer.onStarted.AddListener(uiGameTimer.OnTimerStarted);
+        RestartTimer();
     }
 
     private void Update()
     {
         GameTimer.Update();
         uiGameTimer.RotateByPercent(GameTimer.RemainingPercent);
+    }
+
+    void OnTimerOver()
+    {
+        uiGameTimer.OnTimerOver();
+        GameManager.OrderCounter.CancelAllOrders();
+    }
+
+
+    public void RestartTimer()
+    {
+        GameTimer.Restart();
     }
 }

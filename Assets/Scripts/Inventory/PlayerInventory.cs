@@ -11,12 +11,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         ingredientsStorage = new(MaxSlots);
-        foreach (ItemIngredientObj ingredientObj in GameManager.IngredientObjs)
-        {
-            ingredientsStorage.AddCopy(ingredientObj.Item);
-            if (ingredientsStorage.IsFull())
-                break;
-        }
+ 
     }
 
     void Update()

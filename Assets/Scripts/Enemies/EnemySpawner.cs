@@ -17,8 +17,15 @@ public class EnemySpawner : MonoBehaviour
         SpawnTimer.onCompleted.AddListener(OnSpawnTimerOver);
         SpawnTimer.Restart();
     }
+
+    private void Start()
+    {
+        SpawnRandomEnemy();
+    }
+
     void OnSpawnTimerOver()
     {
+        Debug.Log("OnSpawnTimerOver");
         SpawnRandomEnemy();
         SpawnTimer.Restart();
     }

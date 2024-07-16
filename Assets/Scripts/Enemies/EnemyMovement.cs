@@ -21,9 +21,10 @@ public class EnemyMovement : MonoBehaviour
     public bool IsLocked { get; protected set; }
     public bool IsWaiting { get; protected set; }
 
+
     private void Start()
     {
-        GenerateNewTargetPosition();
+        StartCoroutine(WaitAndGenerateNewTarget());
     }
 
     void Update()
@@ -32,10 +33,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        speed *= smoothness;
-    }
-    public void MovementUpdate()
     {
         if (!IsLocked && !IsWaiting)
         {
@@ -54,6 +51,10 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
+        speed *= smoothness;
+    }
+    public void MovementUpdate()
+    {
         // no speed
         if (speed.magnitude <= 0.5f)
             stateMachine.Stop("walk");
@@ -63,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
         rb.MovePosition(rb.position + Time.deltaTime * moveSpeed * speed);
     }
 
-    private void GenerateNewTargetPosition()
+    private void GenerateNewTarget()
     {
         if (Enemy == null || Enemy.EnemySpawner == null)
             return;
@@ -73,13 +74,17 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator WaitAndGenerateNewTarget()
     {
+        // already waiting
+        if (IsWaiting)
+            yield break;
+
         IsWaiting = true;
         speed = Vector3.zero;
         stateMachine.Stop("walk");
 
         yield return new WaitForSeconds(waitTime);
 
-        GenerateNewTargetPosition();
+        GenerateNewTarget();
         IsWaiting = false;
     }
 
@@ -96,7 +101,7 @@ public class EnemyMovement : MonoBehaviour
     public void Unlock()
     {
         IsLocked = false;
-        GenerateNewTargetPosition();
+        GenerateNewTarget();
     }
 
     public void PushAway(Vector3 direction, float forceMultiplier = 1f)

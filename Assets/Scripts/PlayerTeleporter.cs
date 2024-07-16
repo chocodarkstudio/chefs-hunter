@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UIAnimShortcuts;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTeleporter : MonoBehaviour
 {
@@ -14,6 +17,7 @@ public class PlayerTeleporter : MonoBehaviour
         {
             player.transform.position = targetPoint.position;
             CameraController.SetPos(cameraPoint);
+
             onPlayerTeleport.Invoke();
         }
     }

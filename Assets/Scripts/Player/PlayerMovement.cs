@@ -22,14 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        speed *= smoothness;
-    }
-
-
-    public void MovementUpdate()
-    {
-
-        if (!IsLocked)
+     if (!IsLocked)
         {
             Vector3 movement = Vector3.zero;
             movement.x = Input.GetAxisRaw("Horizontal");
@@ -44,6 +37,15 @@ public class PlayerMovement : MonoBehaviour
 
             speed += movement;
         }
+
+        speed *= smoothness;
+    }
+
+
+    public void MovementUpdate()
+    {
+
+   
 
         // no speed
         if (speed.magnitude <= 0.5f)

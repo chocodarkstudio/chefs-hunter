@@ -40,19 +40,19 @@ public class EnemyCombat : MonoBehaviour
 
     void OnCombatInitialized()
     {
+        enemyMovement.StopAndLock();
+
         // not me
         if (GameManager.CombatManager.EnemyCombat != this)
             return;
-
-        enemyMovement.StopAndLock();
     }
 
     void OnCombatEnded()
     {
+        enemyMovement.Unlock();
+
         if (GameManager.CombatManager.EnemyCombat != this)
             return;
-
-        enemyMovement.Unlock();
 
         // check if player kills the enemy
         bool playerLoseAttack = GameManager.CombatManager.Sequence.PlayedTurns.Exists((combatTurn) =>

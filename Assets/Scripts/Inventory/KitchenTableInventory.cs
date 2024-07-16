@@ -18,12 +18,7 @@ public class KitchenTableInventory : MonoBehaviour
 
 
         ingredientsStorage = new(MaxSlots);
-        foreach (ItemIngredientObj ingredientObj in GameManager.IngredientObjs)
-        {
-            ingredientsStorage.AddCopy(ingredientObj.Item);
-            if (ingredientsStorage.IsFull())
-                break;
-        }
+
     }
 
 
