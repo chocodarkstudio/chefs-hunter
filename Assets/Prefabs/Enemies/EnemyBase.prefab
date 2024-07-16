@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fd6beb774659549bd051600726fb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Visuals>k__BackingField: {fileID: 7641807193812721414}
   <Type>k__BackingField: {fileID: 0}
   <Drops>k__BackingField: []
 --- !u!114 &3173822922795912145
@@ -256,7 +257,6 @@ MonoBehaviour:
   smoothness: 0.8
   rb: {fileID: 56623231229277694}
   targetReachThreshold: 0.5
-  randomRange: 2
   waitTime: 5
 --- !u!114 &7928971446630691538
 MonoBehaviour:

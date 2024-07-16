@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class LevelLoader : MonoBehaviour
     static LevelLoader Singleton;
 
     [SerializeField] SceneRef menu;
-    [SerializeField] GameObject[] destroyOnLoad;
     [SerializeField] SceneRef[] gameplayLevels;
 
     public static readonly List<string> LoadedLevels = new();
@@ -40,22 +40,17 @@ public class LevelLoader : MonoBehaviour
         SceneManager.sceneUnloaded += OnSceneUnloaded;
 
         DontDestroyOnLoad(gameObject);
-        LoadMenu();
     }
 
-    public static void LoadLevel(string sceneName, bool reload = true)
+    public static void LoadLevel(string sceneName, bool reload = true, bool makeActive = false)
     {
-        Singleton.StartCoroutine(LoadLevelCoroutine(sceneName, reload));
+        Singleton.StartCoroutine(LoadLevelCoroutine(sceneName, reload, makeActive));
     }
-    public static IEnumerator LoadLevelCoroutine(string sceneName, bool reload)
+    public static IEnumerator LoadLevelCoroutine(string sceneName, bool reload, bool makeActive)
     {
-        // invalid name
+        // invalid scene
         if (string.IsNullOrEmpty(sceneName))
-        {
             yield break;
-        }
-
-        sceneName = sceneName.ToLower();
 
         // level already loaded and dont want to reload
         if (!reload && IsLevelLoaded(sceneName))
@@ -67,6 +62,18 @@ public class LevelLoader : MonoBehaviour
 
         yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedLevels.Add(sceneName);
+
+        if (makeActive)
+        {
+            // get scene object (This is case insensitive)
+            Scene scene = SceneManager.GetSceneByName(sceneName);
+
+            // invalid scene
+            if (!scene.IsValid())
+                yield break;
+
+            SceneManager.SetActiveScene(scene);
+        }
 
         Debug.Log($"Level loaded: {sceneName}");
         onLoadLevel?.Invoke(sceneName);
@@ -103,6 +110,73 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+
+
+    static void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        //EsceneLoadingTransition.Show(false);
+
+        onLoadedLevel.Invoke(scene.name);
+    }
+
+    static void OnSceneUnloaded(Scene scene)
+    {
+        onUnloadedLevel.Invoke(scene.name);
+    }
+
+
+    public static void LoadMenu(float waitSeconds = 2f)
+    {
+        EsceneLoadingTransition.Show(true);
+        Singleton.StartCoroutine(Singleton.DelayedLoadMenu(waitSeconds, callback: () =>
+        {
+            EsceneLoadingTransition.Show(false);
+        }));
+    }
+
+    IEnumerator DelayedLoadMenu(float waitSeconds, Action callback = null)
+    {
+        yield return new WaitForSeconds(waitSeconds);
+
+        // load menu
+        yield return LoadLevelCoroutine(Singleton.menu.SceneName, reload: false, makeActive: Singleton.menu.MakeActiveOnLoad);
+
+        // unload gameplay
+        foreach (var level in Singleton.gameplayLevels)
+        {
+            yield return UnloadLevelCoroutine(level.SceneName);
+        }
+
+        callback?.Invoke();
+    }
+
+    public static void LoadGameplayLevels(float waitSeconds = 2f)
+    {
+        EsceneLoadingTransition.Show(true);
+        Singleton.StartCoroutine(Singleton.DelayedLoadGameplayLevels(waitSeconds, callback: () =>
+        {
+            EsceneLoadingTransition.Show(false);
+        }));
+    }
+
+    IEnumerator DelayedLoadGameplayLevels(float waitSeconds, Action callback = null)
+    {
+        yield return new WaitForSeconds(waitSeconds);
+
+        // load gameplay
+        foreach (var level in Singleton.gameplayLevels)
+        {
+            yield return LoadLevelCoroutine(level.SceneName, reload: false, makeActive: level.MakeActiveOnLoad);
+        }
+
+        // unload menu
+        yield return UnloadLevelCoroutine(Singleton.menu.SceneName);
+
+        callback?.Invoke();
+    }
+
+
+
     public static bool IsLevelLoaded(string levelName)
     {
         // get scene object (This is case insensitive)
@@ -114,61 +188,6 @@ public class LevelLoader : MonoBehaviour
 
         return scene.isLoaded;
     }
-
-
-
-    static void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        //EsceneLoadingTransition.Show(false);
-
-        onLoadedLevel.Invoke(scene.name);
-        if (scene.name == Singleton.menu.SceneName || scene.name.ToLower() == "kitchen")
-            EsceneLoadingTransition.Show(false);
-    }
-
-    static void OnSceneUnloaded(Scene scene)
-    {
-        onUnloadedLevel.Invoke(scene.name);
-    }
-
-
-    public static void LoadMenu()
-    {
-        EsceneLoadingTransition.Show(true);
-        Singleton.Invoke(nameof(DelayedLoadMenu), 2f);
-    }
-
-    void DelayedLoadMenu()
-    {
-        // load menu
-        LoadLevel(Singleton.menu.SceneName);
-
-        // unload gameplay
-        foreach (var level in Singleton.gameplayLevels)
-        {
-            UnloadLevel(level.SceneName);
-        }
-    }
-
-    public static void LoadGameplayLevels()
-    {
-        EsceneLoadingTransition.Show(true);
-        Singleton.Invoke(nameof(DelayedLoadGameplayLevels), 2f);
-    }
-
-    void DelayedLoadGameplayLevels()
-    {
-        // load gameplay
-        foreach (var level in Singleton.gameplayLevels)
-        {
-            LoadLevel(level.SceneName);
-        }
-
-        // unload menu
-        UnloadLevel(Singleton.menu.SceneName);
-    }
-
-
 
 
     public static GameObject CreateOnLevel(GameObject prefab, Vector3 pos = default, Quaternion rot = default, Transform parent = null)
@@ -200,7 +219,6 @@ public class LevelLoader : MonoBehaviour
         SceneManager.MoveGameObjectToScene(go, scene.Value);
         return true;
     }
-
 
 
 }

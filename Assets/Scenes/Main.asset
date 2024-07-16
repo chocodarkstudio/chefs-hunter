@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Main
   m_EditorClassIdentifier: 
   <SceneName>k__BackingField: Main
+  <MakeActiveOnLoad>k__BackingField: 1
   sceneAsset: {fileID: 102900000, guid: f2bc27311d3cef543aa5a0652d41a3ac, type: 3}

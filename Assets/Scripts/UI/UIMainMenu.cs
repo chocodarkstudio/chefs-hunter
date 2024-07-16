@@ -12,6 +12,13 @@ public class UIMainMenu : MonoBehaviour
 
     [SerializeField] AudioSource[] musicSources;
 
+    private void Awake()
+    {
+        if (musicSlider != null)
+            musicSlider.value = GlobalAudio.MusicVolume;
+        if (soundSlider != null)
+            soundSlider.value = GlobalAudio.EffectVolume;
+    }
 
     public void OnPlayBtn()
     {
@@ -27,19 +34,27 @@ public class UIMainMenu : MonoBehaviour
 
 
 
-public void OnMusicSlider(){
- if (musicSlider==null) return;
- GlobalAudio.MusicVolume = musicSlider.value;
- foreach(AudioSource adsrc in musicSources){
-if (adsrc == null)
-continue;
-  adsrc.volume = GlobalAudio.MusicVolume;
- }
-}
+    public void OnMusicSlider()
+    {
+        if (musicSlider == null)
+            return;
 
-public void OnSoundSlider(){
- if (soundSlider==null)return;
- GlobalAudio.EffectVolume = soundSlider.value;
-}
+        GlobalAudio.MusicVolume = musicSlider.value;
+        foreach (AudioSource adsrc in musicSources)
+        {
+            if (adsrc == null)
+                continue;
+
+            adsrc.volume = GlobalAudio.MusicVolume;
+        }
+    }
+
+    public void OnSoundSlider()
+    {
+        if (soundSlider == null)
+            return;
+
+        GlobalAudio.EffectVolume = soundSlider.value;
+    }
 
 }

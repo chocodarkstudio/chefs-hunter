@@ -80,6 +80,8 @@ public class GenericStateMachine : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(AnimatorClipTrack(clip.length));
+
+        onAnimationPlay.Invoke(clipName);
     }
 
     public AnimationClip FindAnimation(Animator animator, string clipName)

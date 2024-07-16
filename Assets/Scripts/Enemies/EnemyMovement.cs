@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+
     [field: SerializeField] public Enemy Enemy { get; protected set; }
     [SerializeField] GenericStateMachine stateMachine;
     [SerializeField] SpriteRenderer enemySprite;
@@ -15,16 +17,23 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 targetPosition;
     [SerializeField] float targetReachThreshold = 0.5f; // Threshold to consider target reached
-    [SerializeField] float randomRange = 2f; // Range for generating random target positions
     [SerializeField] float waitTime = 2f;
 
     public bool IsLocked { get; protected set; }
     public bool IsWaiting { get; protected set; }
 
+    Tween idleSquishNSquashTween;
+
+    private void Awake()
+    {
+        stateMachine.onAnimationPlay.AddListener(OnAnimationPlay);
+    }
 
     private void Start()
     {
         StartCoroutine(WaitAndGenerateNewTarget());
+
+        Invoke(nameof(CreateIdleSquishNSquashTween), Random.Range(0f, 1f));
     }
 
     void Update()
@@ -108,5 +117,44 @@ public class EnemyMovement : MonoBehaviour
     {
         direction.y = 0;
         speed = direction.normalized * forceMultiplier;
+    }
+
+
+    void OnAnimationPlay(string clipName)
+    {
+        Debug.Log(clipName);
+        if (clipName == "idle")
+        {
+            // create tween
+            if (!idleSquishNSquashTween.IsActive())
+            {
+                CreateIdleSquishNSquashTween();
+            }
+            else if (!idleSquishNSquashTween.IsPlaying())
+                idleSquishNSquashTween.Play();
+        }
+        else
+        {
+            if (idleSquishNSquashTween.IsActive())
+            {
+                idleSquishNSquashTween.Pause();
+                Enemy.Visuals.localScale = Vector3.one;
+            }
+
+        }
+    }
+
+    private void CreateIdleSquishNSquashTween()
+    {
+        // Define the squish and squash scale values
+        Vector3 squishScale = new Vector3(1.1f, 0.9f, 1.0f);
+        Vector3 squashScale = new Vector3(0.9f, 1.1f, 1.0f);
+        float duration = 1f;
+
+        // Create the tween sequence
+        idleSquishNSquashTween = DOTween.Sequence()
+            .Append(Enemy.Visuals.DOScale(squishScale, duration).SetEase(Ease.InOutQuad))
+            .Append(Enemy.Visuals.DOScale(squashScale, duration).SetEase(Ease.InOutQuad))
+            .SetLoops(-1, LoopType.Yoyo);
     }
 }

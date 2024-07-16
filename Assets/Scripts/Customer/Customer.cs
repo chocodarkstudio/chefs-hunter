@@ -11,6 +11,7 @@ public class Customer : MonoBehaviour
 
     [SerializeField] RuntimeAnimatorController[] customerAnimationVariants;
 
+    [SerializeField] UICustomerTimer uiCustomerTimer;
     [SerializeField] UIItem uiRecipeResult;
     [SerializeField] ItemRecipeObj orderRecipeObj;
     public ItemRecipe Order { get; protected set; }
@@ -41,6 +42,8 @@ public class Customer : MonoBehaviour
                 NewRandomOrder();
         });
 
+        OrderTimer.onStarted.AddListener(uiCustomerTimer.OnTimerStarted);
+        OrderTimer.onCompleted.AddListener(uiCustomerTimer.OnTimerOver);
         OrderTimer.onCompleted.AddListener(OnTimerOver);
 
         StartOrderTimer.Restart();
@@ -50,6 +53,7 @@ public class Customer : MonoBehaviour
     {
         StartOrderTimer.Update();
         OrderTimer.Update();
+        uiCustomerTimer.SetFillPercent(OrderTimer.RemainingPercent);
     }
 
 

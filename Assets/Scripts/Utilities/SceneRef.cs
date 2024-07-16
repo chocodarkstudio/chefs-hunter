@@ -10,9 +10,9 @@ using System.Linq;
 public class SceneRef : ScriptableObject
 {
 
-    [field: SerializeField]
-    public string SceneName { get; private set; }
+    [field: SerializeField] public string SceneName { get; private set; }
     public string SceneNameLower => SceneName.ToLower();
+    [field: SerializeField] public bool MakeActiveOnLoad { get; private set; }
 
     public static string Get(SceneRef sceneRef)
     {

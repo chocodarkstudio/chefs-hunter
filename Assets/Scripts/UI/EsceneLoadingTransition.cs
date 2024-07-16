@@ -27,20 +27,26 @@ public class EsceneLoadingTransition : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!mainPanel.activeInHierarchy)
+        if (!mainPanel.activeSelf)
             return;
 
         loadingIcon.Rotate(Vector3.forward, -5, Space.Self);
     }
 
-    public static void Show(bool show) => Singleton.ShowPanel(show);
+    public static void Show(bool show)
+    {
+        if (Singleton == null)
+            return;
+
+        Singleton.ShowPanel(show);
+    }
 
     void ShowPanel(bool show)
     {
         Debug.Log($"EsceneLoadingTransition {show}");
 
         // already in that state
-        if (show == mainPanel.activeInHierarchy)
+        if (show == mainPanel.activeSelf)
             return;
 
         if (animationCoroutine != null)
