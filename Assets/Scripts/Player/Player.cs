@@ -12,14 +12,14 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out DroppeableItem droppeableItem))
+        if (other.TryGetComponent(out ItemDrop droppeableItem))
         {
-            if (droppeableItem.Takeable)
+            if (droppeableItem.IsTakeable)
                 droppeableItem.AddToStorage(Inventory.ingredientsStorage);
         }
     }
 
-    void OnTeleport()
+    void OnTeleport(string teleportName)
     {
         UIInventoryPlayer.UIFollow.UpdatePosition();
     }

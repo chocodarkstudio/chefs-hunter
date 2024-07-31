@@ -1,7 +1,5 @@
 using Combat_NM;
 using Items;
-using ScreenTransition;
-using UIAnimShortcuts;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform uiTopLevel;
     public static Transform UITopLevel => Singleton.uiTopLevel;
-    [SerializeField] Transform mainMenuPanel;
+    [SerializeField] UIMainMenu mainMenu;
 
     [Header("Scene References")]
     [SerializeField] CombatManager combatManager;
@@ -36,8 +34,8 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Prefabs")]
-    [SerializeField] GameObject droppeableItemPrefab;
-    public static GameObject DroppeableItemPrefab => Singleton.droppeableItemPrefab;
+    [SerializeField] GameObject itemDropPrefab;
+    public static GameObject ItemDropPrefab => Singleton.itemDropPrefab;
 
 
     public static GameObject CreateOnUI(GameObject prefab, bool firstSibling = true)
@@ -65,22 +63,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (mainMenuPanel.gameObject.activeSelf)
-            {
-                UIAnim.Scale(mainMenuPanel, TransitionState.Close,
-                    callback: () =>
-                    {
-                        mainMenuPanel.gameObject.SetActive(false);
-                    }
-                );
-            }
-            else
-            {
-                mainMenuPanel.gameObject.SetActive(true);
-                UIAnim.Scale(mainMenuPanel, TransitionState.Open);
-            }
-
-
+            // toggle main menu panel
+            mainMenu.Show(!mainMenu.ShowState);
         }
     }
 

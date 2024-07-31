@@ -1,3 +1,4 @@
+using ChocoDark.GlobalAudio;
 using Combat_NM;
 using DG.Tweening;
 using GameUtils;
@@ -67,11 +68,11 @@ public class EnemyCombat : MonoBehaviour
             Vector3 offset = GUtils.GetRandomPosition(-1f, 1f);
             offset.y = 0;
 
-            DroppeableItem.CreateNew(ingredientDrop.Item, transform.position + offset)
+            ItemDrop.CreateNew(ingredientDrop.Item, transform.position + offset)
                 .SpawnAnim(transform.position);
         }
 
-        GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.enemyDeathClip);
+        GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.enemyDeathClip);
         Enemy.DestroyEnemy();
     }
 
@@ -102,7 +103,7 @@ public class EnemyCombat : MonoBehaviour
             if (combatTurn.type == CombatTurnTypes.Defense && !combatTurn.playerWin)
             {
                 stateMachine.Play("attack", fade: false);
-                GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.playerHitClip);
+                GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.playerHitClip);
             }
             else if (combatTurn.type == CombatTurnTypes.Attack && combatTurn.playerWin)
             {

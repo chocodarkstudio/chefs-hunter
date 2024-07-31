@@ -1,3 +1,4 @@
+using ChocoDark.GlobalAudio;
 using Items;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class OrderCounter : MonoBehaviour
             ShowCustomerLeastTimeOrder();
 
         Debug.Log($"OnCustomerOrdered {customer.Order.Name}");
-        GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.customerBellClip);
+        GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.customerBellClip);
     }
     public void OnCustomerCompleted(Customer customer)
     {
@@ -39,7 +40,7 @@ public class OrderCounter : MonoBehaviour
             ShowCustomerLeastTimeOrder();
 
         Debug.Log($"OnCustomerCompleted {customer.Order.Name}");
-        GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.completeCustomerClip);
+        GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.completeCustomerClip);
     }
     public void OnCustomerCanceled(Customer customer)
     {

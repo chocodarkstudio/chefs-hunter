@@ -817,6 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 409758667}
   cameraPoint: {x: -47, y: 0, z: 0}
+  <TeleporterName>k__BackingField: battle
 --- !u!1 &235712918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
   cameraPoint: {x: 0, y: 0, z: 0}
+  <TeleporterName>k__BackingField: 
 --- !u!1 &415216746
 GameObject:
   m_ObjectHideFlags: 0

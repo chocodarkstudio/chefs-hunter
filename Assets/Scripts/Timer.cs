@@ -16,8 +16,8 @@ public class Timer
     public float RemainingPercent => IsOver ? 1f : ElapsedTime / TimerSeconds;
 
     public bool IsOver => RemainingTime <= 0;
-    public bool IsCompleted { get; protected set; } = true;
 
+    public bool IsRunning { get; protected set; } = false;
 
     // events
     public readonly UnityEvent onStarted = new();
@@ -26,7 +26,7 @@ public class Timer
     public void Restart()
     {
         startedTime = Time.time;
-        IsCompleted = false;
+        IsRunning = true;
         TimerSecondsPlus = 0;
 
         onStarted.Invoke();
@@ -40,12 +40,12 @@ public class Timer
 
     public void Update()
     {
-        if (IsCompleted)
+        if (!IsRunning)
             return;
 
         if (IsOver)
         {
-            IsCompleted = true;
+            IsRunning = false;
             onCompleted.Invoke();
         }
     }
@@ -60,6 +60,6 @@ public class Timer
 
     public void Stop()
     {
-        IsCompleted = true;
+        IsRunning = false;
     }
 }

@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UIAnimShortcuts;
-using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerTeleporter : MonoBehaviour
 {
     [SerializeField] Transform targetPoint;
     [SerializeField] Vector3 cameraPoint;
+    [field: SerializeField] public string TeleporterName { get; private set; }
 
-    public static readonly UnityEvent onPlayerTeleport = new();
+    public static readonly UnityEvent<string> onPlayerTeleport = new();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,7 +16,7 @@ public class PlayerTeleporter : MonoBehaviour
             player.transform.position = targetPoint.position;
             CameraController.SetPos(cameraPoint);
 
-            onPlayerTeleport.Invoke();
+            onPlayerTeleport.Invoke(TeleporterName.ToLower());
         }
     }
 }

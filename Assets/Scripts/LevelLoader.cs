@@ -30,16 +30,14 @@ public class LevelLoader : MonoBehaviour
     {
         if (Singleton != null)
         {
-            DestroyImmediate(gameObject);
+            //DestroyImmediate(gameObject);
+            Debug.LogWarning($"Another instance of {nameof(LevelLoader)} already exists!! Make sure only one exists");
             return;
         }
         Singleton = this;
 
-
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public static void LoadLevel(string sceneName, bool reload = true, bool makeActive = false)
@@ -87,9 +85,17 @@ public class LevelLoader : MonoBehaviour
 
     public static IEnumerator UnloadLevelCoroutine(string levelName)
     {
+        AsyncOperation asyncOperation = null;
+        try
+        {
+            // Comienza la descarga de la escena de manera asíncrona
+            asyncOperation = SceneManager.UnloadSceneAsync(levelName);
+        }
+        catch (ArgumentException)
+        {
+            Debug.Log($"Scene to unload is invalid: {levelName}");
+        }
 
-        // Comienza la descarga de la escena de manera asíncrona
-        AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(levelName);
 
         // Esperar hasta que la operación de descarga esté completa
         if (asyncOperation != null)

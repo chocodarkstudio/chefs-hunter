@@ -121,7 +121,7 @@ public class UIGameTimer : MonoBehaviour, IPointerClickHandler
             return;
 
         // timer currently running
-        if (!GameManager.GameSequencer.GameTimer.IsCompleted)
+        if (GameManager.GameSequencer.GameTimer.IsRunning)
             return;
 
         GameManager.GameSequencer.RestartTimer();

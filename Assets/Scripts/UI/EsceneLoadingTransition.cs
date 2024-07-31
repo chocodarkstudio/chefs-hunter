@@ -22,6 +22,12 @@ public class EsceneLoadingTransition : MonoBehaviour
 
     private void Awake()
     {
+        if (Singleton != null)
+        {
+            //DestroyImmediate(gameObject);
+            Debug.LogWarning($"Another instance of {nameof(EsceneLoadingTransition)} already exists!! Make sure only one exists");
+            return;
+        }
         Singleton = this;
     }
 

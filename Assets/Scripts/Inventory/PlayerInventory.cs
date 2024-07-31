@@ -47,9 +47,9 @@ public class PlayerInventory : MonoBehaviour
         {
             Vector3 randomPos = GUtils.GetRandomPosition(-1, 1f);
             randomPos.y = 0;
-            DroppeableItem droppeableItem = DroppeableItem.CreateNew(ingredient.Copy(), transform.position + randomPos);
+            ItemDrop droppeableItem = ItemDrop.CreateNew(ingredient.Copy(), transform.position + randomPos);
             droppeableItem.SpawnAnim(transform.position);
-            droppeableItem.Takeable = false;
+            droppeableItem.IsTakeable = false;
 
             ingredientsStorage.RemoveRef(ingredient);
         }

@@ -1,3 +1,4 @@
+using ChocoDark.GlobalAudio;
 using Combat_NM;
 using Items;
 using UnityEngine;
@@ -76,7 +77,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (combatTurn.step == CombatTurnSteps.CheckWin && combatTurn.playerWin)
         {
-            GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.enemyHitClip);
+            GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.enemyHitClip);
         }
 
         // The player loses
@@ -95,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
                 // End the combat
                 GameManager.CombatManager.EndCombat();
 
-                GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.missHitClip);
+                GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.missHitClip);
             }
             // Defense -> Loses items.
             else if (combatTurn.type == CombatTurnTypes.Defense)
@@ -103,7 +104,7 @@ public class PlayerCombat : MonoBehaviour
                 int halfItemCount = (int)(Player.Inventory.ingredientsStorage.Count * 0.5f);
                 if (halfItemCount == 0)
                     halfItemCount = 1;
-                GlobalAudio.PlayEffect(GlobalAudio.GeneralClips.missHitClip);
+                GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.missHitClip);
                 Player.Inventory.DiscardPlayerFirstItems(halfItemCount);
             }
         }
