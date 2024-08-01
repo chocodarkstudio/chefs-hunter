@@ -88,6 +88,7 @@ public class Customer : MonoBehaviour
     {
         IsOrdering = false;
         OrderTimer.Stop();
+        uiCustomerTimer.Show(false);
         GoBack();
 
         StartOrderTimer.Restart();

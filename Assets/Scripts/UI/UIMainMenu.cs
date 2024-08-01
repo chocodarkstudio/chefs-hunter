@@ -14,12 +14,22 @@ public class UIMainMenu : UIShowPanel
 
     [SerializeField] MenuIntroVideo menuIntroVideo;
 
+    [SerializeField] Toggle combatTutorialToggle;
+
     private void Awake()
     {
         if (musicSlider != null)
             musicSlider.value = GlobalAudio.MusicVolume;
         if (soundSlider != null)
             soundSlider.value = GlobalAudio.SFXVolume;
+
+        if (combatTutorialToggle != null)
+        {
+            if (GameManager.CombatTutorial != null)
+                combatTutorialToggle.isOn = GameManager.CombatTutorial.TutorialEnabled;
+            combatTutorialToggle.onValueChanged.AddListener(OnCombatTutorialToggle);
+        }
+
     }
 
     public void OnPlayBtn()
@@ -73,5 +83,17 @@ public class UIMainMenu : UIShowPanel
     {
         base.Show(show);
         blackBackgroundPanel.gameObject.SetActive(show);
+
+        if (combatTutorialToggle != null && GameManager.CombatTutorial != null)
+            combatTutorialToggle.isOn = GameManager.CombatTutorial.TutorialEnabled;
+    }
+
+    public void OnCombatTutorialToggle(bool value)
+    {
+        // CombatTutorial not defined
+        if (GameManager.CombatTutorial == null)
+            return;
+
+        GameManager.CombatTutorial.TutorialEnabled = value;
     }
 }

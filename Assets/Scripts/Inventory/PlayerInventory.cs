@@ -11,7 +11,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         ingredientsStorage = new(MaxSlots);
- 
+
     }
 
     void Update()
@@ -47,9 +47,9 @@ public class PlayerInventory : MonoBehaviour
         {
             Vector3 randomPos = GUtils.GetRandomPosition(-1, 1f);
             randomPos.y = 0;
-            ItemDrop droppeableItem = ItemDrop.CreateNew(ingredient.Copy(), transform.position + randomPos);
-            droppeableItem.SpawnAnim(transform.position);
-            droppeableItem.IsTakeable = false;
+            ItemDrop drop = ItemDrop.CreateNew(ingredient.Copy(), transform.position + randomPos);
+            drop.SpawnAnim(transform.position);
+            drop.IsTakeable = false;
 
             ingredientsStorage.RemoveRef(ingredient);
         }

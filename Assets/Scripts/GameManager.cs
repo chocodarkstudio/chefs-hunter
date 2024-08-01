@@ -1,4 +1,4 @@
-using Combat_NM;
+using CombatSystem;
 using Items;
 using UnityEngine;
 
@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [Header("Scene References")]
     [SerializeField] CombatManager combatManager;
     public static CombatManager CombatManager => Singleton.combatManager;
+
+    [SerializeField] UICombatTutorial combatTutorial;
+    public static UICombatTutorial CombatTutorial => Singleton.combatTutorial;
+
     [SerializeField] OrderCounter orderCounter;
     public static OrderCounter OrderCounter => Singleton.orderCounter;
     [SerializeField] GameSequencer gameSequencer;

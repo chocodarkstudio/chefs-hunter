@@ -76,6 +76,15 @@ public class OrderCounter : MonoBehaviour
     }
 
     #region Display customer order
+    public void ShowRecipeItem(bool show)
+    {
+        // prevent show on null item
+        if (uiRecipeItem.ItemRecipe == null && show == true)
+            return;
+
+        uiRecipeItem.Show(show);
+    }
+
     public void ShowCustomerOrder(Customer ctmr)
     {
         Debug.Log($"ShowCustomerOrder {ctmr}");
@@ -84,13 +93,13 @@ public class OrderCounter : MonoBehaviour
         // no customer
         if (ctmr == null)
         {
-            uiRecipeItem.Show(false);
+            ShowRecipeItem(false);
             uiRecipeItem.UpdateRecipe(null);
             return;
         }
 
         uiRecipeItem.UpdateRecipe(ctmr.Order.Copy());
-        uiRecipeItem.Show(true);
+        ShowRecipeItem(true);
     }
 
     public void ShowFirstCustomerOrder()

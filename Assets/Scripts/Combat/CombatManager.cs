@@ -1,8 +1,26 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Combat_NM
+namespace CombatSystem
 {
+    /// <summary>
+    /// Configures how the step should be treated. </summary>
+    /// <remarks>
+    /// StepConfig will be checked after onTurnStep are invoked. </remarks>
+    public class StepConfig
+    {
+        public CombatTurn CurrentTurn { get; protected set; }
+
+        /// <summary>
+        /// Moves to the next step when the current step ends. </summary>
+        public bool MoveToNextStep { get; set; } = true;
+
+        public StepConfig(CombatTurn currentStep)
+        {
+            CurrentTurn = currentStep;
+        }
+    }
+
     public class CombatManager : MonoBehaviour
     {
         [SerializeField] protected CombatSequence StandardSequence;
@@ -16,7 +34,7 @@ namespace Combat_NM
         // events
         public static readonly UnityEvent onCombatInitialized = new();
         public static readonly UnityEvent onCombatEnded = new();
-        public static readonly UnityEvent<CombatTurn> onTurnStep = new();
+        public static readonly UnityEvent<StepConfig> onTurnStep = new();
 
         public void InitializeCombat(CombatSequence sequence, PlayerCombat playerCombat, EnemyCombat enemyCombat)
         {
@@ -44,11 +62,17 @@ namespace Combat_NM
             if (!InCombat || Sequence.IsStarted)
                 return;
 
-            onTurnStep.Invoke(Sequence.CurrentTurn);
+
+            StepConfig stepConfig = new(Sequence.CurrentTurn);
+            onTurnStep.Invoke(stepConfig);
 
             // auto next step
-            Invoke(nameof(NextStep), 0.2f);
+            if (stepConfig.MoveToNextStep)
+            {
+                DelayedNextStep();
+            }
         }
+
 
         public void NextTurn()
         {
@@ -63,10 +87,15 @@ namespace Combat_NM
                 EndCombat();
                 return;
             }
-            onTurnStep.Invoke(Sequence.CurrentTurn);
+
+            StepConfig stepConfig = new(Sequence.CurrentTurn);
+            onTurnStep.Invoke(stepConfig);
 
             // auto next step
-            Invoke(nameof(NextStep), 0.2f);
+            if (stepConfig.MoveToNextStep)
+            {
+                DelayedNextStep();
+            }
         }
 
         public void EndCombat()
@@ -95,14 +124,21 @@ namespace Combat_NM
             }
 
             Sequence.NextTurnStep();
-            // auto next step, (not when SelectWeapon)
-            if (Sequence.CurrentTurn.step != CombatTurnSteps.SelectWeapon)
-                Invoke(nameof(NextStep), 0.2f);
 
             if (Sequence.CurrentTurn.step == CombatTurnSteps.CheckWin)
                 OnCheckWinStep();
 
-            onTurnStep.Invoke(Sequence.CurrentTurn);
+            StepConfig stepConfig = new(Sequence.CurrentTurn);
+            onTurnStep.Invoke(stepConfig);
+
+            // auto next step
+            if (stepConfig.MoveToNextStep)
+                DelayedNextStep();
+        }
+
+        void DelayedNextStep()
+        {
+            Invoke(nameof(NextStep), 0.2f);
         }
 
 

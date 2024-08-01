@@ -7,6 +7,8 @@ public class UIShowPanel : MonoBehaviour
 {
     [field: SerializeField] public GameObject MainPanel { get; protected set; }
     public bool ShowState { get; protected set; }
+    bool isGoingToHide;
+
     protected Tween panelScaleTween;
 
     /// <summary>
@@ -32,9 +34,15 @@ public class UIShowPanel : MonoBehaviour
     /// Show state with open/close animation </summary>
     public virtual void Show(bool show)
     {
+        // already in that state
+        if (ShowState == show || (isGoingToHide && !show))
+            return;
+
         // prevent run multiple animations
         if (panelScaleTween != null)
             panelScaleTween.Kill();
+
+        isGoingToHide = !show;
 
         // open anim
         if (show)

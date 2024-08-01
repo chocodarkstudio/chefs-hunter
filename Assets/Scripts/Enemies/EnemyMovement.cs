@@ -34,6 +34,9 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(WaitAndGenerateNewTarget());
 
         Invoke(nameof(CreateIdleSquishNSquashTween), Random.Range(0f, 1f));
+
+        if (GameManager.CombatManager.InCombat)
+            StopAndLock();
     }
 
     void Update()

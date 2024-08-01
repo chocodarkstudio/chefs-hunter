@@ -30,6 +30,7 @@ namespace UIItem_NM
 
         [field: SerializeField] public bool IgnoreEvents { get; set; } = false;
         [field: SerializeField] public bool Draggable { get; set; } = true;
+        [field: SerializeField] public bool DraggableBasedOnID { get; set; } = true;
 
 
         protected virtual void OnEnable()
@@ -80,7 +81,8 @@ namespace UIItem_NM
             SetSecondaryText(item.SecondaryText);
 
             // if ID is not defined, isnt draggable (null item)
-            Draggable = !string.IsNullOrEmpty(item.ID);
+            if (DraggableBasedOnID)
+                Draggable = !string.IsNullOrEmpty(item.ID);
 
             gameObject.name = "UIItemData " + item.ID;
         }

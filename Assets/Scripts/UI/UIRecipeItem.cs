@@ -1,13 +1,9 @@
-using DG.Tweening;
 using Items;
-using ScreenTransition;
-using UIAnimShortcuts;
 using UIItem_NM;
 using UnityEngine;
 
-public class UIRecipeItem : MonoBehaviour
+public class UIRecipeItem : UIShowPanel
 {
-    [SerializeField] GameObject mainPanel;
 
     /// <summary>
     /// Can be null to show empty </summary>
@@ -16,9 +12,6 @@ public class UIRecipeItem : MonoBehaviour
     [SerializeField] UIItem[] ingredientsUIItems;
     [SerializeField] UIItem resultUIItems;
 
-
-    public bool ShowState { get; private set; }
-    Tween panelScaleTween;
 
     public void UpdateRecipe(ItemRecipe itemRecipe)
     {
@@ -53,53 +46,5 @@ public class UIRecipeItem : MonoBehaviour
         });
     }
 
-
-
-
-    /// <summary>
-    /// Instant apply show state </summary>
-    public void SetShow(bool show)
-    {
-        ShowState = show;
-        mainPanel.SetActive(show);
-
-        // on show
-        if (show)
-        {
-
-        }
-        // on hide
-        else
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// Show state with open/close animation </summary>
-    public void Show(bool show)
-    {
-        // prevent run multiple animations
-        if (panelScaleTween != null)
-            panelScaleTween.Kill();
-
-        // open anim
-        if (show)
-        {
-            panelScaleTween = UIAnim.Scale(mainPanel.transform, TransitionState.Open);
-            SetShow(true);
-        }
-        // close anim
-        else
-        {
-            panelScaleTween = UIAnim.Scale(mainPanel.transform, TransitionState.Close,
-                callback: OnCloseAnim);
-        }
-    }
-
-    void OnCloseAnim()
-    {
-        SetShow(false);
-    }
 
 }

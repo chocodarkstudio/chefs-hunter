@@ -1,5 +1,5 @@
 using ChocoDark.GlobalAudio;
-using Combat_NM;
+using CombatSystem;
 using Items;
 using UnityEngine;
 
@@ -59,15 +59,20 @@ public class PlayerCombat : MonoBehaviour
         uiWeaponSelector.Show(false);
     }
 
-    void OnTurnStep(CombatTurn combatTurn)
+    void OnTurnStep(StepConfig stepConfig)
     {
-        Debug.Log($"OnTurnStep {combatTurn.step} {combatTurn.type} {combatTurn.playerWin}");
-        if (combatTurn.step == CombatTurnSteps.SelectWeapon)
+        Debug.Log($"OnTurnStep {stepConfig.CurrentTurn.step} {stepConfig.CurrentTurn.type} {stepConfig.CurrentTurn.playerWin}");
+        if (stepConfig.CurrentTurn.step == CombatTurnSteps.SelectWeapon &&
+            (stepConfig.CurrentTurn.type == CombatTurnTypes.Attack || stepConfig.CurrentTurn.type == CombatTurnTypes.Defense))
         {
+            Debug.Log("Select a weapon!");
+
             SelectedWeapon = null;
             uiWeaponSelector.Show(true);
-            Debug.Log("Select a weapon!");
-            SelectWeaponTimer.Restart();
+            // dont use SelectWeaponTimer on tutorial
+            if (!GameManager.CombatTutorial.TutorialEnabled)
+                SelectWeaponTimer.Restart();
+            stepConfig.MoveToNextStep = false;
         }
         else
         {
@@ -75,16 +80,16 @@ public class PlayerCombat : MonoBehaviour
             SelectWeaponTimer.Stop();
         }
 
-        if (combatTurn.step == CombatTurnSteps.CheckWin && combatTurn.playerWin)
+        if (stepConfig.CurrentTurn.step == CombatTurnSteps.CheckWin && stepConfig.CurrentTurn.playerWin)
         {
             GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.enemyHitClip);
         }
 
         // The player loses
-        if (combatTurn.step == CombatTurnSteps.End && !combatTurn.playerWin)
+        if (stepConfig.CurrentTurn.step == CombatTurnSteps.End && !stepConfig.CurrentTurn.playerWin)
         {
             // Attack -> End combat
-            if (combatTurn.type == CombatTurnTypes.Attack)
+            if (stepConfig.CurrentTurn.type == CombatTurnTypes.Attack)
             {
                 // Calculate the direction vector from the enemy to the player
                 Vector3 enemyPos = GameManager.CombatManager.EnemyCombat.transform.position;
@@ -99,7 +104,7 @@ public class PlayerCombat : MonoBehaviour
                 GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.missHitClip);
             }
             // Defense -> Loses items.
-            else if (combatTurn.type == CombatTurnTypes.Defense)
+            else if (stepConfig.CurrentTurn.type == CombatTurnTypes.Defense)
             {
                 int halfItemCount = (int)(Player.Inventory.ingredientsStorage.Count * 0.5f);
                 if (halfItemCount == 0)

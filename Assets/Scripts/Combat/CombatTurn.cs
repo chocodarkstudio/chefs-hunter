@@ -1,9 +1,11 @@
-namespace Combat_NM
+namespace CombatSystem
 {
     public enum CombatTurnTypes
     {
+        CombatStart,
         Attack,
-        Defense
+        Defense,
+        CombatEnd
     }
 
     public enum CombatTurnSteps
@@ -21,6 +23,17 @@ namespace Combat_NM
         public CombatTurnSteps step;
 
         public bool playerWin;
+
+        public bool Equals(CombatTurn other)
+        {
+            if (type != other.type)
+                return false;
+            if (step != other.step)
+                return false;
+            if (playerWin != other.playerWin)
+                return false;
+            return true;
+        }
     }
 
 }

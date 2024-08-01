@@ -8,12 +8,14 @@ public class DualMusicTransition : MonoBehaviour
     [SerializeField] GlobalAudioSource kitchenSource;
     [SerializeField] GlobalAudioSource battleSource;
 
-    string lastTeleportName;
+    string lastSourceName;
 
     private void Awake()
     {
         PlayerTeleporter.onPlayerTeleport.AddListener(OnPlayerTeleport);
         GlobalAudio.onChannelVolumeChange.AddListener(OnChannelVolumeChange);
+
+        SourceTransition("kitchen");
     }
 
     void Start()
@@ -29,27 +31,31 @@ public class DualMusicTransition : MonoBehaviour
 
         /*
         // Wait until all sources are prepared
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForEndOfFrame();
         */
 
         // Start all audio sources at the exact same time
-        kitchenSource.AudioSource.Play();
-        battleSource.AudioSource.Play();
-
+        kitchenSource.AudioSource.PlayScheduled(AudioSettings.dspTime);
+        battleSource.AudioSource.PlayScheduled(AudioSettings.dspTime);
         yield break;
     }
 
     void OnPlayerTeleport(string teleportName)
+    {
+        SourceTransition(teleportName);
+    }
+
+    void SourceTransition(string sourceName)
     {
         float currentVol = GlobalAudio.GetChannelVolume(kitchenSource.Channel);
 
         float transitionDuration = 0.25f;
 
         // do volume transitions
-        kitchenSource.AudioSource.DOFade(teleportName == "kitchen" ? currentVol : 0f, transitionDuration).SetEase(Ease.InOutQuad);
-        battleSource.AudioSource.DOFade(teleportName == "battle" ? currentVol : 0f, transitionDuration).SetEase(Ease.InOutQuad);
+        kitchenSource.AudioSource.DOFade(sourceName == "kitchen" ? currentVol : 0f, transitionDuration).SetEase(Ease.InOutQuad);
+        battleSource.AudioSource.DOFade(sourceName == "battle" ? currentVol : 0f, transitionDuration).SetEase(Ease.InOutQuad);
 
-        lastTeleportName = teleportName;
+        lastSourceName = sourceName;
     }
 
     void OnChannelVolumeChange(Channel channel, float vol)
@@ -58,7 +64,7 @@ public class DualMusicTransition : MonoBehaviour
             return;
 
         // default, no teleport touched yet
-        if (string.IsNullOrEmpty(lastTeleportName))
+        if (string.IsNullOrEmpty(lastSourceName))
         {
             kitchenSource.AudioSource.volume = vol;
             battleSource.AudioSource.volume = 0f;
@@ -68,8 +74,8 @@ public class DualMusicTransition : MonoBehaviour
         // Otherwise, keep the current volume.
 
         // kitchen
-        kitchenSource.AudioSource.volume = lastTeleportName == "kitchen" ? vol : kitchenSource.AudioSource.volume;
+        kitchenSource.AudioSource.volume = lastSourceName == "kitchen" ? vol : kitchenSource.AudioSource.volume;
         // battle
-        battleSource.AudioSource.volume = lastTeleportName == "battle" ? vol : battleSource.AudioSource.volume;
+        battleSource.AudioSource.volume = lastSourceName == "battle" ? vol : battleSource.AudioSource.volume;
     }
 }

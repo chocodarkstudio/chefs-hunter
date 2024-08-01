@@ -157,7 +157,7 @@ MonoBehaviour:
   itemObj: {fileID: 0}
   <IsTakeable>k__BackingField: 1
   <DestroyTimer>k__BackingField:
-    timerSeconds: 10
+    timerSeconds: 20
 --- !u!135 &1851836635
 SphereCollider:
   m_ObjectHideFlags: 0

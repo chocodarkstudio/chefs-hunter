@@ -1,5 +1,5 @@
 using ChocoDark.GlobalAudio;
-using Combat_NM;
+using CombatSystem;
 using DG.Tweening;
 using GameUtils;
 using Items;
@@ -76,36 +76,36 @@ public class EnemyCombat : MonoBehaviour
         Enemy.DestroyEnemy();
     }
 
-    void OnTurnStep(CombatTurn combatTurn)
+    void OnTurnStep(StepConfig stepConfig)
     {
         if (GameManager.CombatManager.EnemyCombat != this)
             return;
 
-        if (combatTurn.step == CombatTurnSteps.Start)
+        if (stepConfig.CurrentTurn.step == CombatTurnSteps.Start)
         {
-            if (combatTurn.type == CombatTurnTypes.Defense)
+            if (stepConfig.CurrentTurn.type == CombatTurnTypes.Defense)
             {
                 SelectRandomWeapon();
                 ShowAttackHighlight(true);
                 stateMachine.Play("pre_attack", fade: false);
             }
-            else if (combatTurn.type == CombatTurnTypes.Attack)
+            else if (stepConfig.CurrentTurn.type == CombatTurnTypes.Attack)
             {
                 // unselect weapon
                 SelectedWeapon = null;
                 stateMachine.Play("idle", fade: false);
             }
         }
-        else if (combatTurn.step == CombatTurnSteps.CheckWin)
+        else if (stepConfig.CurrentTurn.step == CombatTurnSteps.CheckWin)
         {
             ShowAttackHighlight(false);
 
-            if (combatTurn.type == CombatTurnTypes.Defense && !combatTurn.playerWin)
+            if (stepConfig.CurrentTurn.type == CombatTurnTypes.Defense && !stepConfig.CurrentTurn.playerWin)
             {
                 stateMachine.Play("attack", fade: false);
                 GlobalAudio.PlaySFX(GlobalAudio.GeneralClips.playerHitClip);
             }
-            else if (combatTurn.type == CombatTurnTypes.Attack && combatTurn.playerWin)
+            else if (stepConfig.CurrentTurn.type == CombatTurnTypes.Attack && stepConfig.CurrentTurn.playerWin)
             {
                 stateMachine.Play("damaged", fade: false);
             }

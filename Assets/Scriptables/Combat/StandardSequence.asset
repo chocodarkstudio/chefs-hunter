@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Turns>k__BackingField:
   - type: 0
+    step: 3
+    playerWin: 0
+  - type: 1
+    step: 0
+    playerWin: 0
+  - type: 2
     step: 0
     playerWin: 0
   - type: 1
     step: 0
     playerWin: 0
-  - type: 0
-    step: 0
+  - type: 3
+    step: 3
     playerWin: 0
   <Repeat>k__BackingField: 0

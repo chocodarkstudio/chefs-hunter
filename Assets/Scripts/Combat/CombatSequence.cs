@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Combat_NM
+namespace CombatSystem
 {
     [CreateAssetMenu(fileName = "new CombatSequence", menuName = "CombatSequence", order = 0)]
     public class CombatSequence : ScriptableObject
